@@ -26,10 +26,8 @@ namespace CarCompareDesktop.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CarCompareContext-d1a204cc-6cb" +
-            "2-4983-b6ca-8e135f56615c;Integrated Security=True;Connect Timeout=30;Encrypt=Fal" +
-            "se;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=" +
-            "False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Evie\\CarCompareConte" +
+            "xt-d1a204cc-6cb2-4983-b6ca-8e135f56615c.mdf;Integrated Security=True")]
         public string Setting {
             get {
                 return ((string)(this["Setting"]));

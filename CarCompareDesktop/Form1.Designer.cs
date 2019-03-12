@@ -48,6 +48,7 @@
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -168,7 +169,8 @@
             this.columnHeader9,
             this.columnHeader10,
             this.columnHeader11,
-            this.columnHeader12});
+            this.columnHeader12,
+            this.columnHeader13});
             this.listView1.Location = new System.Drawing.Point(8, 45);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(856, 211);
@@ -188,51 +190,55 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Reg. No.";
+            this.columnHeader1.Text = "ID";
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Make";
+            this.columnHeader2.Text = "Reg";
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Model";
+            this.columnHeader3.Text = "Make";
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Trim";
+            this.columnHeader4.Text = "Model";
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Mileage";
+            this.columnHeader5.Text = "Trim";
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Text = "Colour";
+            this.columnHeader6.Text = "Mileage";
             // 
             // columnHeader7
             // 
-            this.columnHeader7.Text = "Year";
+            this.columnHeader7.Text = "Colour";
             // 
             // columnHeader8
             // 
-            this.columnHeader8.Text = "Price";
+            this.columnHeader8.Text = "Year";
             // 
             // columnHeader9
             // 
-            this.columnHeader9.Text = "URL";
+            this.columnHeader9.Text = "Price";
             // 
             // columnHeader10
             // 
-            this.columnHeader10.Text = "Location";
+            this.columnHeader10.Text = "URL";
             // 
             // columnHeader11
             // 
-            this.columnHeader11.Text = "Date Added";
+            this.columnHeader11.Text = "Location";
             // 
             // columnHeader12
             // 
-            this.columnHeader12.Text = "MOT Expiry";
+            this.columnHeader12.Text = "Date Added";
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "MOT";
             // 
             // Form1
             // 
@@ -282,6 +288,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
     }
 }
 
