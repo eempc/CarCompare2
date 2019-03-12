@@ -42,5 +42,27 @@ namespace CarCompareDesktop {
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => Application.Exit();
+
+        private void buttonAddRow_Click(object sender, EventArgs e) {
+            ManualAddCar();
+        }
+
+        public void ManualAddCar() {
+            connect.Open();
+
+            string commandString = String.Format("INSERT INTO Car " +
+                "(RegistrationMark, Make, Model, TrimLevel, Mileage, Colour, Year, Price, Url, Location, DateAdded, MotExpiry) " +
+                "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')",
+                textBox_Reg.Text, textBox_Make.Text, textBox_Model.Text, textBox_Trim.Text, textBox_Mileage.Text, textBox_Colour.Text,
+                textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text, dateTimePicker_DateAdded.Text, textBox_MOT.Text
+                );
+            textBoxTest.AppendText(commandString);
+            SqlCommand adder = new SqlCommand(commandString, connect);
+            adder.ExecuteNonQuery();
+            connect.Close();
+
+            
+        }
+
     }
 }
