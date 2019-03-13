@@ -9,22 +9,52 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Move all SQL stuff to a new class later, i.e. aim is to remove System.Data.SqlClient. 
+// All this repeating connect.Open() stuff is readable but not clean
+
 namespace CarCompareDesktop {
     public partial class Form1 : Form {
         public Form1() {
             InitializeComponent();
             StartMethod();
+            GetColumnsNames();
         }
 
         TextBox[] textBoxes;
+        List<string> columnNames = new List<string>();
+
         public void StartMethod() {
             textBoxes = new TextBox[] {
                 textBox_ID, textBox_Reg, textBox_Make, textBox_Model, textBox_Trim, textBox_Mileage, textBox_Colour,
                 textBox_Year, textBox_Price, textBox_URL, textBox_Location, textBox_MOT
              };
+
+
+
+            //button_EditRow.Enabled = false;
         }
         
         SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Evie\CarCompareContext-d1a204cc-6cb2-4983-b6ca-8e135f56615c.mdf;Integrated Security=True");
+
+        private void button1_Click(object sender, EventArgs e) {
+            //GetColumnsNames();
+        }
+
+        public void GetColumnsNames() {
+            connect.Open();
+            SqlCommand command = new SqlCommand("SELECT * FROM Car WHERE 1 = 2", connect);            
+            SqlDataReader reader = command.ExecuteReader();
+
+            for (int i = 0; i < reader.FieldCount; i++)
+                columnNames.Add(reader.GetName(i));
+
+            reader.Close();
+            connect.Close();         
+            
+            foreach (string name in columnNames) {
+                textBoxTest.AppendText(name + "\r\n");
+            }
+        }
 
         private void buttonDisplayAll_Click(object sender, EventArgs e) {
             DisplayAll();
@@ -56,12 +86,15 @@ namespace CarCompareDesktop {
             ManualAddCar();
         }
 
+        // String interpolation method
         public void ManualAddCar() {
             string commandString = string.Format("INSERT INTO Car " +
                 "(RegistrationMark, Make, Model, TrimLevel, Mileage, Colour, Year, Price, Url, Location, DateAdded, MotExpiry) " +
                 "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')",
-                textBox_Reg.Text, textBox_Make.Text, textBox_Model.Text, textBox_Trim.Text, textBox_Mileage.Text, textBox_Colour.Text,
-                textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text, dateTimePicker_DateAdded.Text, textBox_MOT.Text
+                textBox_Reg.Text, textBox_Make.Text, textBox_Model.Text, 
+                textBox_Trim.Text, textBox_Mileage.Text, textBox_Colour.Text, 
+                textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, 
+                textBox_Location.Text, dateTimePicker_DateAdded.Text, textBox_MOT.Text
             );
 
             connect.Open();
@@ -70,12 +103,41 @@ namespace CarCompareDesktop {
             connect.Close();           
         }
 
+        // Parameters Add With Value
         public void UpdateRow() {
 
+            List<string> fieldIdentifiers = new List<string>();
+            fieldIdentifiers.Add("@_id");
+            string cmdText = "UPDATE Car SET ";
+
+            for (int i = 1; i < columnNames.Count; i++) {
+                if (i != columnNames.Count - 2) {
+                    // I.e. not the Date Added field at n-2 (i wish it were last on the last)
+                    // Static columns should be at the start, e.g. Id and this DateAdded
+                    cmdText += columnNames[i] + " = @_" + columnNames[i] + ", ";
+                    fieldIdentifiers.Add("@_" + columnNames[i]);
+                }
+            }
+
+            cmdText = cmdText.Trim().TrimEnd(',');
+            cmdText += " WHERE Id = @_id";
+            //textBoxTest.AppendText(cmdText);
+            connect.Open();
+            SqlCommand updater = connect.CreateCommand();
+            updater.CommandText = cmdText;
+
+            for (int i = 0; i < textBoxes.Length; i++) {
+                updater.Parameters.AddWithValue(fieldIdentifiers[i], textBoxes[i].Text);
+                //textBoxTest.AppendText(fieldIdentifiers[i] + " " +  textBoxes[i].Text + "\r\n");
+            }
+
+            updater.ExecuteNonQuery();
+            connect.Close();
         }
 
+        // Right click Edit on an ID and it will populate the textboxes (not the date time picker). The textboxes were initialised into an array
         private void editToolStripMenuItem1_Click(object sender, EventArgs e) {
-            //textBox_ID.Text = listView1.SelectedItems[0].SubItems[0].Text;
+            button_EditRow.Enabled = true;
             for (int i = 0; i < textBoxes.Length; i++) {
                 if (i != textBoxes.Length-1) {
                     textBoxes[i].Text = listView1.SelectedItems[0].SubItems[i].Text;
@@ -84,5 +146,11 @@ namespace CarCompareDesktop {
                 }
             }
         }
+
+        private void button_EditRow_Click(object sender, EventArgs e) {
+            button_EditRow.Enabled = false;
+            UpdateRow();
+        }
+
     }
 }
