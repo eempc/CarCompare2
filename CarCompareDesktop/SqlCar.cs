@@ -11,24 +11,25 @@ using System.Windows.Forms;
 
 namespace CarCompareDesktop {
     public class SqlCar {
-        // Car and DB attributes go here
-        //public int CarId { get; set; }
-        //public string CarRegNo { get; set; }
-        //public string CarMake { get; set; }
-        //public string CarModel { get; set; }
-        //public string CarTrim { get; set; }
-        //public int CarMileage { get; set; }
-        //public string CarColour { get; set; }
-        //public decimal CarPrice { get; set; }
-        //public string CarUrl { get; set; }
-        //public string CarLocation { get; set; }
-        //public DateTime CarDateAdded { get; set; }
-        //public int CarMotExpiry { get; set; }
+        //Car and DB attributes go here
+        public int id { get; set; }
+        public string registration { get; set; }
+        public string make { get; set; }
+        public string model { get; set; }
+        public string trim { get; set; }
+        public int mileage { get; set; }
+        public string colour { get; set; }
+        public int year { get; set; }
+        public decimal price { get; set; }
+        public string url { get; set; }
+        public string location { get; set; }
+        public DateTime dateAdded { get; set; }
+        public int mot { get; set; }
 
-        public int id, mileage, mot, year;
-        public string registration, make, model, trim, colour, url, location;
-        public decimal price;
-        public DateTime dateAdded;
+        //public int id, mileage, mot, year;
+        //public string registration, make, model, trim, colour, url, location;
+        //public decimal price;
+        //public DateTime dateAdded;
 
         public SqlCar(int id, string registration, string make, string model, string trim, int mileage, string colour, int year, decimal price, string url, string location, DateTime dateAdded, int mot) {
             this.id = id;
@@ -47,14 +48,15 @@ namespace CarCompareDesktop {
         }
 
         public static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Evie\CarCompareContext-d1a204cc-6cb2-4983-b6ca-8e135f56615c.mdf;Integrated Security=True";
+        public static SqlConnection connect = new SqlConnection(connectionString);
 
         public static List<string> GetColumnNames() {
-            SqlConnection connection = new SqlConnection(connectionString);
+            //SqlConnection connect = new SqlConnection(connectionString);
 
             List<string> columnNames = new List<string>();
 
-            connection.Open();
-            SqlCommand command = new SqlCommand("SELECT * FROM Car WHERE 1 = 2", connection);
+            connect.Open();
+            SqlCommand command = new SqlCommand("SELECT * FROM Car WHERE 1 = 2", connect);
             SqlDataReader reader = command.ExecuteReader();
 
             for (int i = 0; i < reader.FieldCount; i++) {
@@ -62,17 +64,17 @@ namespace CarCompareDesktop {
             }
             
             reader.Close();
-            connection.Close();
+            connect.Close();
             return columnNames;
         }
 
         public static List<SqlCar> AccessSqlReader(string commandString) {
-            SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Evie\CarCompareContext-d1a204cc-6cb2-4983-b6ca-8e135f56615c.mdf;Integrated Security=True");
+            //SqlConnection connect = new SqlConnection(connectionString);
 
             List<SqlCar> cars = new List<SqlCar>();
 
-            connection.Open();
-            SqlCommand command = new SqlCommand(commandString, connection);
+            connect.Open();
+            SqlCommand command = new SqlCommand(commandString, connect);
             SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read()) {
@@ -95,7 +97,7 @@ namespace CarCompareDesktop {
                 );
             }
             reader.Close();
-            connection.Close();
+            connect.Close();
 
             return cars;
         }

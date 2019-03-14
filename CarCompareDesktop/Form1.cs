@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,7 +20,7 @@ namespace CarCompareDesktop {
         public Form1() {
             InitializeComponent();
             StartMethod();
-            ColumnsNames();
+            //ColumnsNames();
         }
 
         TextBox[] textBoxes;
@@ -44,8 +45,14 @@ namespace CarCompareDesktop {
             }
             List<SqlCar> myCars = SqlCar.AccessSqlReader("SELECT * FROM Car");
             foreach (var car in myCars) {
-                textBoxTest.AppendText(car.registration + "\r\n");
+                textBoxTest.AppendText(car.registration + "\r\n" + car.dateAdded.ToString() + "\r\n");
             }
+
+            foreach (var car in myCars) {
+                foreach (PropertyInfo prop in car.GetType().GetProperties()) {                  
+                    textBoxTest.AppendText(prop.GetValue(car, null) + "\r\n"); // properties require {get; set;}
+                }
+            }            
         }
 
 
