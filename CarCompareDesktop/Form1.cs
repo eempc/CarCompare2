@@ -39,20 +39,33 @@ namespace CarCompareDesktop {
         SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Evie\CarCompareContext-d1a204cc-6cb2-4983-b6ca-8e135f56615c.mdf;Integrated Security=True");
 
         private void button1_Click(object sender, EventArgs e) {
-            List<string> myList = SqlCar.GetColumnNames();
-            foreach (string item in myList) {
-                textBoxTest.AppendText(item + Environment.NewLine);
-            }
-            List<SqlCar> myCars = SqlCar.AccessSqlReader("SELECT * FROM Car");
-            foreach (var car in myCars) {
-                textBoxTest.AppendText(car.registration + "\r\n" + car.dateAdded.ToString() + "\r\n");
+            //List<string> myList = SqlCar.GetColumnNames();
+            //foreach (string item in myList) {
+            //    textBoxTest.AppendText(item + Environment.NewLine);
+            //}
+            //List<SqlCar> myCars = SqlCar.AccessSqlReader("SELECT * FROM Car");
+            //foreach (var car in myCars) {
+            //    textBoxTest.AppendText(car.registration + "\r\n" + car.dateAdded.ToString() + "\r\n");
+            //}
+
+            //foreach (var car in myCars) {
+            //    foreach (PropertyInfo prop in car.GetType().GetProperties()) {                  
+            //        textBoxTest.AppendText(prop.GetValue(car, null) + "\r\n"); // properties require {get; set;}
+            //    }
+            //}
+
+            List<string> columns = SqlCar.GetColumnNames();
+            //if (columns.Count != sqlParameters.Length) return;
+
+            string cmdText = "UPDATE Car SET ";
+
+            foreach (string str in columns) {
+                if (str != "Id")
+                    cmdText += str + " = @_" + str + ", ";
             }
 
-            foreach (var car in myCars) {
-                foreach (PropertyInfo prop in car.GetType().GetProperties()) {                  
-                    textBoxTest.AppendText(prop.GetValue(car, null) + "\r\n"); // properties require {get; set;}
-                }
-            }            
+            cmdText = cmdText.Trim().TrimEnd(',') + " WHERE Id = @_Id";
+            textBoxTest.AppendText(cmdText);
         }
 
         public void ColumnsNames() {
@@ -109,7 +122,7 @@ namespace CarCompareDesktop {
             ManualAddCar();
         }
 
-        // String interpolation method
+        // String format/interpolation method
         public void ManualAddCar() {
             string commandString = String.Format("INSERT INTO Car " +
                 "(RegistrationMark, Make, Model, TrimLevel, Mileage, Colour, Year, Price, Url, Location, DateAdded, MotExpiry) " +
@@ -126,35 +139,40 @@ namespace CarCompareDesktop {
 
         // Parameters Add With Value
         public void UpdateRow() {
+            string[] textBoxStrings = { textBox_ID.Text, textBox_Reg.Text, textBox_Make.Text, textBox_Model.Text, textBox_Trim.Text, textBox_Mileage.Text,
+                textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text,
+                dateTimePicker_DateAdded.Text, textBox_MOT.Text };
 
-            List<string> fieldIdentifiers = new List<string>();
-            fieldIdentifiers.Add("@_id");
+            SqlCar.UpdateDatabaseEntry(textBoxStrings);
 
-            string cmdText = "UPDATE Car SET ";
+            //List<string> fieldIdentifiers = new List<string>();
+            //fieldIdentifiers.Add("@_id");
 
-            for (int i = 1; i < columnNames.Count; i++) {
-                if (i != columnNames.Count - 2) {
-                    // I.e. not the Date Added field at n-2 (i wish it were last on the last)
-                    // Static columns should be at the start, e.g. Id and this DateAdded
-                    cmdText += columnNames[i] + " = @_" + columnNames[i] + ", ";
-                    fieldIdentifiers.Add("@_" + columnNames[i]);
-                }
-            }
+            //string cmdText = "UPDATE Car SET ";
 
-            cmdText = cmdText.Trim().TrimEnd(',');
-            cmdText += " WHERE Id = @_id";
-            //textBoxTest.AppendText(cmdText);
-            connect.Open();
-            SqlCommand updater = connect.CreateCommand();
-            updater.CommandText = cmdText;
+            //for (int i = 1; i < columnNames.Count; i++) {
+            //    if (i != columnNames.Count - 2) {
+            //        // I.e. not the Date Added field at n-2 (i wish it were last on the last)
+            //        // Static columns should be at the start, e.g. Id and this DateAdded
+            //        cmdText += columnNames[i] + " = @_" + columnNames[i] + ", ";
+            //        fieldIdentifiers.Add("@_" + columnNames[i]);
+            //    }
+            //}
 
-            for (int i = 0; i < textBoxes.Length; i++) {
-                updater.Parameters.AddWithValue(fieldIdentifiers[i], textBoxes[i].Text);
-                //textBoxTest.AppendText(fieldIdentifiers[i] + " " +  textBoxes[i].Text + "\r\n");
-            }
+            //cmdText = cmdText.Trim().TrimEnd(',');
+            //cmdText += " WHERE Id = @_id";
+            ////textBoxTest.AppendText(cmdText);
+            //connect.Open();
+            //SqlCommand updater = connect.CreateCommand();
+            //updater.CommandText = cmdText;
 
-            updater.ExecuteNonQuery();
-            connect.Close();
+            //for (int i = 0; i < textBoxes.Length; i++) {
+            //    updater.Parameters.AddWithValue(fieldIdentifiers[i], textBoxes[i].Text);
+            //    //textBoxTest.AppendText(fieldIdentifiers[i] + " " +  textBoxes[i].Text + "\r\n");
+            //}
+
+            //updater.ExecuteNonQuery();
+            //connect.Close();
 
             // Need to update Listview, this is why the data should've been downloaded and placed in a List<Car class>, to avoid querying the database for an updated list
         }

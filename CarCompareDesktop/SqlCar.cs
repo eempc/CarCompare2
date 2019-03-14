@@ -102,5 +102,30 @@ namespace CarCompareDesktop {
             return cars;
         }
 
+        public static void UpdateDatabaseEntry(string[] sqlParameters) {
+            List<string> columns = GetColumnNames();
+            //if (columns.Count != sqlParameters.Length) return;
+
+            string cmdText = "UPDATE Car SET ";
+
+            foreach (string str in columns) {
+                if (str != "Id") {
+                    cmdText += str + " = @_" + str + ", ";
+                }                    
+            }
+
+            cmdText = cmdText.Trim().TrimEnd(',') + " WHERE Id = @_Id";
+
+            connect.Open();
+            SqlCommand updater = connect.CreateCommand();
+            updater.CommandText = cmdText;
+
+            for (int i = 0; i < columns.Count; i++) {
+                updater.Parameters.AddWithValue("@_" + columns[i], sqlParameters[i]);   
+            }
+
+            updater.ExecuteNonQuery();
+            connect.Close();
+        }
     }
 }
