@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -25,7 +24,6 @@ namespace CarCompareDesktop {
         TextBox[] textBoxes;
         List<string> columnNames = new List<string>();
         
-
         public void StartMethod() {
             textBoxes = new TextBox[] {
                 textBox_ID, textBox_Reg, textBox_Make, textBox_Model, textBox_Trim, textBox_Mileage, textBox_Colour,
@@ -35,8 +33,6 @@ namespace CarCompareDesktop {
             button_EditRow.Enabled = false;
         }
         
-        SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Evie\CarCompareContext-d1a204cc-6cb2-4983-b6ca-8e135f56615c.mdf;Integrated Security=True");
-
         private void button1_Click(object sender, EventArgs e) {
         }
 
@@ -44,7 +40,7 @@ namespace CarCompareDesktop {
             DisplayAll();
         }
 
-        // Non-async method of querying database. Loops through the properties of an object via reflections
+        // Non-async method of querying database. Loops through the properties of an object via reflections, then put data into a ListView
         public void DisplayAll() {
             listView1.Items.Clear();
 
@@ -78,7 +74,7 @@ namespace CarCompareDesktop {
             SqlCar.ExecuteNonQuery(commandString);         
         }
         
-        // UPDATING 
+        // UPDATING AN ENTRY
         // Right click Edit on a listview item ID number to populate the textbox fields
         private void editToolStripMenuItem1_Click(object sender, EventArgs e) {
             button_EditRow.Enabled = true;
@@ -105,20 +101,21 @@ namespace CarCompareDesktop {
             SqlCar.UpdateDatabaseEntry(textBoxStrings);
         }
 
+        // Right click to delete the entry in listview
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
-            DialogResult result = MessageBox.Show(
-                "Are you sure you want to delete this entry?", 
-                "Important Question", 
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes) {
-                DeleteRow();
-            }            
+                DeleteRow();                     
         }
 
         public void DeleteRow() {
-            SqlCar.ExecuteNonQuery(String.Format("DELETE FROM Car WHERE Id = '{0}'", listView1.SelectedItems[0].SubItems[0].Text));
+        DialogResult result = MessageBox.Show(
+            "Are you sure you want to delete this entry?",
+            "Important Question",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes) {
+                SqlCar.ExecuteNonQuery(String.Format("DELETE FROM Car WHERE Id = '{0}'", listView1.SelectedItems[0].SubItems[0].Text));
+            }
         }
     }
 }

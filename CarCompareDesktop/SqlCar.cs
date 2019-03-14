@@ -10,8 +10,7 @@ using System.Windows.Forms;
 // It is better to use return values from this class to Form1
 
 namespace CarCompareDesktop {
-    public class SqlCar {
-        //Car and DB attributes go here
+    public class SqlCar {        
         public int id { get; set; }
         public string registration { get; set; }
         public string make { get; set; }
@@ -25,11 +24,6 @@ namespace CarCompareDesktop {
         public string location { get; set; }
         public DateTime dateAdded { get; set; }
         public int mot { get; set; }
-
-        //public int id, mileage, mot, year;
-        //public string registration, make, model, trim, colour, url, location;
-        //public decimal price;
-        //public DateTime dateAdded;
 
         public SqlCar(int id, string registration, string make, string model, string trim, int mileage, string colour, int year, decimal price, string url, string location, DateTime dateAdded, int mot) {
             this.id = id;
@@ -51,8 +45,6 @@ namespace CarCompareDesktop {
         public static SqlConnection connect = new SqlConnection(connectionString);
 
         public static List<string> GetColumnNames() {
-            //SqlConnection connect = new SqlConnection(connectionString);
-
             List<string> columnNames = new List<string>();
 
             connect.Open();
@@ -69,8 +61,6 @@ namespace CarCompareDesktop {
         }
 
         public static List<SqlCar> AccessSqlReader(string commandString) {
-            //SqlConnection connect = new SqlConnection(connectionString);
-
             List<SqlCar> cars = new List<SqlCar>();
 
             connect.Open();
@@ -106,20 +96,20 @@ namespace CarCompareDesktop {
             List<string> columns = GetColumnNames();
             //if (columns.Count != sqlParameters.Length) return;
 
+            // Construct the command string
             string cmdText = "UPDATE Car SET ";
-
             foreach (string str in columns) {
                 if (str != "Id") {
                     cmdText += str + " = @_" + str + ", ";
                 }                    
             }
-
             cmdText = cmdText.Trim().TrimEnd(',') + " WHERE Id = @_Id";
 
             connect.Open();
             SqlCommand updater = connect.CreateCommand();
             updater.CommandText = cmdText;
 
+            // Add the parameters
             for (int i = 0; i < columns.Count; i++) {
                 updater.Parameters.AddWithValue("@_" + columns[i], sqlParameters[i]);   
             }
