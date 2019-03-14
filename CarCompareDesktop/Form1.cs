@@ -55,8 +55,6 @@ namespace CarCompareDesktop {
             }            
         }
 
-
-
         public void ColumnsNames() {
             connect.Open();
             SqlCommand command = new SqlCommand("SELECT * FROM Car WHERE 1 = 2", connect);            
@@ -77,20 +75,32 @@ namespace CarCompareDesktop {
         public void DisplayAll() {
             listView1.Items.Clear();
 
-            connect.Open();
-            SqlCommand command = new SqlCommand("SELECT * FROM Car", connect);
-            SqlDataReader reader = command.ExecuteReader();
+            List<SqlCar> myCars = SqlCar.AccessSqlReader("SELECT * FROM Car");
 
-            while (reader.Read()) {
-                //textBoxTest.AppendText(reader.GetValue(1) + "\r\n");
-                ListViewItem newItem = new ListViewItem(reader.GetValue(0).ToString());
-                for (int i = 1; i < 13; i++) {
-                    newItem.SubItems.Add(reader.GetValue(i).ToString());
+            foreach (var car in myCars) {
+                ListViewItem newItem = new ListViewItem(car.id.ToString());
+                foreach (PropertyInfo prop in car.GetType().GetProperties()) {
+                    if (prop.Name != "id")
+                        newItem.SubItems.Add(prop.GetValue(car, null).ToString());
                 }
                 listView1.Items.Add(newItem);
             }
-            reader.Close();
-            connect.Close();
+
+
+            //connect.Open();
+            //SqlCommand command = new SqlCommand("SELECT * FROM Car", connect);
+            //SqlDataReader reader = command.ExecuteReader();
+
+            //while (reader.Read()) {
+            //    //textBoxTest.AppendText(reader.GetValue(1) + "\r\n");
+            //    ListViewItem newItem = new ListViewItem(reader.GetValue(0).ToString());
+            //    for (int i = 1; i < 13; i++) {
+            //        newItem.SubItems.Add(reader.GetValue(i).ToString());
+            //    }
+            //    listView1.Items.Add(newItem);
+            //}
+            //reader.Close();
+            //connect.Close();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => Application.Exit();
