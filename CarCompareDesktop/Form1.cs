@@ -19,11 +19,12 @@ namespace CarCompareDesktop {
         public Form1() {
             InitializeComponent();
             StartMethod();
-            GetColumnsNames();
+            ColumnsNames();
         }
 
         TextBox[] textBoxes;
         List<string> columnNames = new List<string>();
+        
 
         public void StartMethod() {
             textBoxes = new TextBox[] {
@@ -37,14 +38,15 @@ namespace CarCompareDesktop {
         SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Evie\CarCompareContext-d1a204cc-6cb2-4983-b6ca-8e135f56615c.mdf;Integrated Security=True");
 
         private void button1_Click(object sender, EventArgs e) {
-            string commandString = String.Format("INSERT INTO Car (RegistrationMark, Make, Model, TrimLevel, Mileage, Colour, Year, Price, Url, Location, DateAdded, MotExpiry) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')",
-                textBox_Reg.Text, textBox_Make.Text, textBox_Model.Text, textBox_Trim.Text, textBox_Mileage.Text,
-                textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text,
-                dateTimePicker_DateAdded.Text, textBox_MOT.Text);
-            textBoxTest.AppendText(commandString + Environment.NewLine);
+            List<string> myList = SqlCar.GetColumnNames();
+            foreach (string item in myList) {
+                textBoxTest.AppendText(item + Environment.NewLine);
+            }
         }
 
-        public void GetColumnsNames() {
+
+
+        public void ColumnsNames() {
             connect.Open();
             SqlCommand command = new SqlCommand("SELECT * FROM Car WHERE 1 = 2", connect);            
             SqlDataReader reader = command.ExecuteReader();
