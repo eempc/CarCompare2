@@ -42,6 +42,10 @@ namespace CarCompareDesktop {
             foreach (string item in myList) {
                 textBoxTest.AppendText(item + Environment.NewLine);
             }
+            List<SqlCar> myCars = SqlCar.AccessSqlReader("SELECT * FROM Car");
+            foreach (var car in myCars) {
+                textBoxTest.AppendText(car.registration + "\r\n");
+            }
         }
 
 
