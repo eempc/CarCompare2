@@ -127,5 +127,12 @@ namespace CarCompareDesktop {
             updater.ExecuteNonQuery();
             connect.Close();
         }
+
+        public static void ExecuteNonQuery(string commandString) {
+            connect.Open();
+            SqlCommand command = new SqlCommand(commandString, connect);
+            command.ExecuteNonQuery();
+            connect.Close();
+        }
     }
 }

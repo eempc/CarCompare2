@@ -20,7 +20,6 @@ namespace CarCompareDesktop {
         public Form1() {
             InitializeComponent();
             StartMethod();
-            //ColumnsNames();
         }
 
         TextBox[] textBoxes;
@@ -39,52 +38,13 @@ namespace CarCompareDesktop {
         SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Evie\CarCompareContext-d1a204cc-6cb2-4983-b6ca-8e135f56615c.mdf;Integrated Security=True");
 
         private void button1_Click(object sender, EventArgs e) {
-            //List<string> myList = SqlCar.GetColumnNames();
-            //foreach (string item in myList) {
-            //    textBoxTest.AppendText(item + Environment.NewLine);
-            //}
-            //List<SqlCar> myCars = SqlCar.AccessSqlReader("SELECT * FROM Car");
-            //foreach (var car in myCars) {
-            //    textBoxTest.AppendText(car.registration + "\r\n" + car.dateAdded.ToString() + "\r\n");
-            //}
-
-            //foreach (var car in myCars) {
-            //    foreach (PropertyInfo prop in car.GetType().GetProperties()) {                  
-            //        textBoxTest.AppendText(prop.GetValue(car, null) + "\r\n"); // properties require {get; set;}
-            //    }
-            //}
-
-            List<string> columns = SqlCar.GetColumnNames();
-            //if (columns.Count != sqlParameters.Length) return;
-
-            string cmdText = "UPDATE Car SET ";
-
-            foreach (string str in columns) {
-                if (str != "Id")
-                    cmdText += str + " = @_" + str + ", ";
-            }
-
-            cmdText = cmdText.Trim().TrimEnd(',') + " WHERE Id = @_Id";
-            textBoxTest.AppendText(cmdText);
-        }
-
-        public void ColumnsNames() {
-            connect.Open();
-            SqlCommand command = new SqlCommand("SELECT * FROM Car WHERE 1 = 2", connect);            
-            SqlDataReader reader = command.ExecuteReader();
-
-            for (int i = 0; i < reader.FieldCount; i++)
-                columnNames.Add(reader.GetName(i));
-
-            reader.Close();
-            connect.Close();                   
         }
 
         private void buttonDisplayAll_Click(object sender, EventArgs e) {
             DisplayAll();
         }
 
-        // Non-async method of querying database
+        // Non-async method of querying database. Loops through the properties of an object via reflections
         public void DisplayAll() {
             listView1.Items.Clear();
 
@@ -98,22 +58,6 @@ namespace CarCompareDesktop {
                 }
                 listView1.Items.Add(newItem);
             }
-
-
-            //connect.Open();
-            //SqlCommand command = new SqlCommand("SELECT * FROM Car", connect);
-            //SqlDataReader reader = command.ExecuteReader();
-
-            //while (reader.Read()) {
-            //    //textBoxTest.AppendText(reader.GetValue(1) + "\r\n");
-            //    ListViewItem newItem = new ListViewItem(reader.GetValue(0).ToString());
-            //    for (int i = 1; i < 13; i++) {
-            //        newItem.SubItems.Add(reader.GetValue(i).ToString());
-            //    }
-            //    listView1.Items.Add(newItem);
-            //}
-            //reader.Close();
-            //connect.Close();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => Application.Exit();
@@ -122,7 +66,7 @@ namespace CarCompareDesktop {
             ManualAddCar();
         }
 
-        // String format/interpolation method
+        // String format/interpolation method (bad because of SQL Injection)
         public void ManualAddCar() {
             string commandString = String.Format("INSERT INTO Car " +
                 "(RegistrationMark, Make, Model, TrimLevel, Mileage, Colour, Year, Price, Url, Location, DateAdded, MotExpiry) " +
@@ -131,53 +75,11 @@ namespace CarCompareDesktop {
                 textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text, 
                 dateTimePicker_DateAdded.Text, textBox_MOT.Text);
 
-            connect.Open();
-            SqlCommand adder = new SqlCommand(commandString, connect);
-            adder.ExecuteNonQuery();
-            connect.Close();           
+            SqlCar.ExecuteNonQuery(commandString);         
         }
-
-        // Parameters Add With Value
-        public void UpdateRow() {
-            string[] textBoxStrings = { textBox_ID.Text, textBox_Reg.Text, textBox_Make.Text, textBox_Model.Text, textBox_Trim.Text, textBox_Mileage.Text,
-                textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text,
-                dateTimePicker_DateAdded.Text, textBox_MOT.Text };
-
-            SqlCar.UpdateDatabaseEntry(textBoxStrings);
-
-            //List<string> fieldIdentifiers = new List<string>();
-            //fieldIdentifiers.Add("@_id");
-
-            //string cmdText = "UPDATE Car SET ";
-
-            //for (int i = 1; i < columnNames.Count; i++) {
-            //    if (i != columnNames.Count - 2) {
-            //        // I.e. not the Date Added field at n-2 (i wish it were last on the last)
-            //        // Static columns should be at the start, e.g. Id and this DateAdded
-            //        cmdText += columnNames[i] + " = @_" + columnNames[i] + ", ";
-            //        fieldIdentifiers.Add("@_" + columnNames[i]);
-            //    }
-            //}
-
-            //cmdText = cmdText.Trim().TrimEnd(',');
-            //cmdText += " WHERE Id = @_id";
-            ////textBoxTest.AppendText(cmdText);
-            //connect.Open();
-            //SqlCommand updater = connect.CreateCommand();
-            //updater.CommandText = cmdText;
-
-            //for (int i = 0; i < textBoxes.Length; i++) {
-            //    updater.Parameters.AddWithValue(fieldIdentifiers[i], textBoxes[i].Text);
-            //    //textBoxTest.AppendText(fieldIdentifiers[i] + " " +  textBoxes[i].Text + "\r\n");
-            //}
-
-            //updater.ExecuteNonQuery();
-            //connect.Close();
-
-            // Need to update Listview, this is why the data should've been downloaded and placed in a List<Car class>, to avoid querying the database for an updated list
-        }
-
-        // Right click Edit on an ID and it will populate the textboxes (not the date time picker). The textboxes were initialised into an array
+        
+        // UPDATING 
+        // Right click Edit on a listview item ID number to populate the textbox fields
         private void editToolStripMenuItem1_Click(object sender, EventArgs e) {
             button_EditRow.Enabled = true;
             for (int i = 0; i < textBoxes.Length; i++) {
@@ -189,20 +91,34 @@ namespace CarCompareDesktop {
             }
         }
 
+        // Then click the button to activate the method
         private void button_EditRow_Click(object sender, EventArgs e) {
-            button_EditRow.Enabled = false;
             UpdateRow();
         }
 
+        // The method collects the text from the textboxes and sends it to be processed on the SqlCar class
+        public void UpdateRow() {
+            string[] textBoxStrings = { textBox_ID.Text, textBox_Reg.Text, textBox_Make.Text, textBox_Model.Text, textBox_Trim.Text, textBox_Mileage.Text,
+                textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text,
+                dateTimePicker_DateAdded.Text, textBox_MOT.Text };
+
+            SqlCar.UpdateDatabaseEntry(textBoxStrings);
+        }
+
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
-            DeleteRow();
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to delete this entry?", 
+                "Important Question", 
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes) {
+                DeleteRow();
+            }            
         }
 
         public void DeleteRow() {
-            connect.Open();
-            SqlCommand deleter = new SqlCommand(String.Format("DELETE FROM Car WHERE Id = '{0}'",listView1.SelectedItems[0].SubItems[0].Text), connect);
-            deleter.ExecuteNonQuery();
-            connect.Close();
+            SqlCar.ExecuteNonQuery(String.Format("DELETE FROM Car WHERE Id = '{0}'", listView1.SelectedItems[0].SubItems[0].Text));
         }
     }
 }
