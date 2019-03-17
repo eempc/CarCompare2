@@ -55,7 +55,7 @@ namespace CarCompareDesktop {
         }
 
         // String format/interpolation method (bad because of SQL Injection)
-        public void CreateNewCar() {
+        public async void CreateNewCar() {
             string commandString = String.Format("INSERT INTO Car " +
                 "(RegistrationMark, Make, Model, TrimLevel, Mileage, Colour, Year, Price, Url, Location, DateAdded, MotExpiry) " +
                 "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", 
@@ -63,7 +63,7 @@ namespace CarCompareDesktop {
                 textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text, 
                 dateTimePicker_DateAdded.Text, textBox_MOT.Text);
 
-            SqlCar.CreateDatabaseEntry(commandString);         
+            await SqlCar.CreateDatabaseEntry(commandString);         
         }
         
         // UPDATING AN ENTRY
@@ -108,6 +108,10 @@ namespace CarCompareDesktop {
             if (result == DialogResult.Yes) {
                 SqlCar.DeleteDatabaseEntry(listView1.SelectedItems[0].SubItems[0].Text);
             }
+        }
+
+        public void DeleteByCriteria() {
+
         }
     }
 }

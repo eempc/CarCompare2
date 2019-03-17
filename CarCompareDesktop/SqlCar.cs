@@ -118,10 +118,10 @@ namespace CarCompareDesktop {
             connect.Close();
         }
 
-        public static void CreateDatabaseEntry(string commandString) {
-            connect.Open();
+        public static async Task CreateDatabaseEntry(string commandString) {
+            await connect.OpenAsync();
             SqlCommand command = new SqlCommand(commandString, connect);
-            command.ExecuteNonQuery();
+            await command.ExecuteNonQueryAsync();
             connect.Close();
         }
 
