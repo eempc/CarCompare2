@@ -33,11 +33,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
-            this.button_EditRow = new System.Windows.Forms.Button();
+            this.buttonUpdateCar = new System.Windows.Forms.Button();
             this.textBox_ID = new System.Windows.Forms.TextBox();
             this.label0 = new System.Windows.Forms.Label();
             this.dateTimePicker_DateAdded = new System.Windows.Forms.DateTimePicker();
-            this.buttonAddRow = new System.Windows.Forms.Button();
+            this.buttonCreateCar = new System.Windows.Forms.Button();
             this.textBox_MOT = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -156,11 +156,11 @@
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Silver;
             this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.button_EditRow);
+            this.tabPage1.Controls.Add(this.buttonUpdateCar);
             this.tabPage1.Controls.Add(this.textBox_ID);
             this.tabPage1.Controls.Add(this.label0);
             this.tabPage1.Controls.Add(this.dateTimePicker_DateAdded);
-            this.tabPage1.Controls.Add(this.buttonAddRow);
+            this.tabPage1.Controls.Add(this.buttonCreateCar);
             this.tabPage1.Controls.Add(this.textBox_MOT);
             this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.label11);
@@ -205,15 +205,15 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button_EditRow
+            // buttonUpdateCar
             // 
-            this.button_EditRow.Location = new System.Drawing.Point(691, 386);
-            this.button_EditRow.Name = "button_EditRow";
-            this.button_EditRow.Size = new System.Drawing.Size(75, 23);
-            this.button_EditRow.TabIndex = 55;
-            this.button_EditRow.Text = "Update";
-            this.button_EditRow.UseVisualStyleBackColor = true;
-            this.button_EditRow.Click += new System.EventHandler(this.button_EditRow_Click);
+            this.buttonUpdateCar.Location = new System.Drawing.Point(691, 386);
+            this.buttonUpdateCar.Name = "buttonUpdateCar";
+            this.buttonUpdateCar.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdateCar.TabIndex = 55;
+            this.buttonUpdateCar.Text = "Update";
+            this.buttonUpdateCar.UseVisualStyleBackColor = true;
+            this.buttonUpdateCar.Click += new System.EventHandler(this.buttonUpdateCar_Click);
             // 
             // textBox_ID
             // 
@@ -239,15 +239,15 @@
             this.dateTimePicker_DateAdded.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker_DateAdded.TabIndex = 52;
             // 
-            // buttonAddRow
+            // buttonCreateCar
             // 
-            this.buttonAddRow.Location = new System.Drawing.Point(679, 461);
-            this.buttonAddRow.Name = "buttonAddRow";
-            this.buttonAddRow.Size = new System.Drawing.Size(129, 23);
-            this.buttonAddRow.TabIndex = 51;
-            this.buttonAddRow.Text = "Add New Car";
-            this.buttonAddRow.UseVisualStyleBackColor = true;
-            this.buttonAddRow.Click += new System.EventHandler(this.buttonAddRow_Click);
+            this.buttonCreateCar.Location = new System.Drawing.Point(679, 461);
+            this.buttonCreateCar.Name = "buttonCreateCar";
+            this.buttonCreateCar.Size = new System.Drawing.Size(129, 23);
+            this.buttonCreateCar.TabIndex = 51;
+            this.buttonCreateCar.Text = "Add New Car";
+            this.buttonCreateCar.UseVisualStyleBackColor = true;
+            this.buttonCreateCar.Click += new System.EventHandler(this.buttonCreateCar_Click);
             // 
             // textBox_MOT
             // 
@@ -600,7 +600,7 @@
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // MainWindowsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -609,7 +609,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainWindowsForm";
             this.Text = "Car Compare Desktop";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -655,7 +655,7 @@
         private System.Windows.Forms.TextBox textBox_ID;
         private System.Windows.Forms.Label label0;
         private System.Windows.Forms.DateTimePicker dateTimePicker_DateAdded;
-        private System.Windows.Forms.Button buttonAddRow;
+        private System.Windows.Forms.Button buttonCreateCar;
         private System.Windows.Forms.TextBox textBox_MOT;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
@@ -682,7 +682,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.Button button_EditRow;
+        private System.Windows.Forms.Button buttonUpdateCar;
         private System.Windows.Forms.Button button1;
     }
 }

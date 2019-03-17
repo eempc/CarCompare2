@@ -60,7 +60,7 @@ namespace CarCompareDesktop {
             return columnNames;
         }
 
-        public static List<SqlCar> AccessSqlReader(string commandString) {
+        public static List<SqlCar> ReadDatabase(string commandString) {
             List<SqlCar> cars = new List<SqlCar>();
 
             connect.Open();
@@ -118,10 +118,18 @@ namespace CarCompareDesktop {
             connect.Close();
         }
 
-        public static void ExecuteNonQuery(string commandString) {
+        public static void CreateDatabaseEntry(string commandString) {
             connect.Open();
             SqlCommand command = new SqlCommand(commandString, connect);
             command.ExecuteNonQuery();
+            connect.Close();
+        }
+
+        public static void DeleteDatabaseEntry(string id) {
+            connect.Open();
+            SqlCommand deleter = new SqlCommand("DELETE FROM Car WHERE Id = @_Id", connect);
+            deleter.Parameters.AddWithValue("@_Id", id);
+            deleter.ExecuteNonQuery();
             connect.Close();
         }
     }

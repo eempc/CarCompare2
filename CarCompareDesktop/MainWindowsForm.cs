@@ -20,7 +20,7 @@ namespace CarCompareDesktop {
                 textBox_Year, textBox_Price, textBox_URL, textBox_Location, textBox_MOT
             };
 
-            button_EditRow.Enabled = false;
+            buttonUpdateCar.Enabled = false;
         }
         
         private async void button1_Click(object sender, EventArgs e) {
@@ -36,7 +36,7 @@ namespace CarCompareDesktop {
         public void DisplayAll() {
             listView1.Items.Clear();
 
-            List<SqlCar> myCars = SqlCar.AccessSqlReader("SELECT * FROM Car");
+            List<SqlCar> myCars = SqlCar.ReadDatabase("SELECT * FROM Car");
 
             foreach (var car in myCars) {
                 ListViewItem newItem = new ListViewItem(car.id.ToString());
@@ -50,12 +50,12 @@ namespace CarCompareDesktop {
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => Application.Exit();
 
-        private void buttonAddRow_Click(object sender, EventArgs e) {
-            ManualAddCar();
+        private void buttonCreateCar_Click(object sender, EventArgs e) {
+            CreateNewCar();
         }
 
         // String format/interpolation method (bad because of SQL Injection)
-        public void ManualAddCar() {
+        public void CreateNewCar() {
             string commandString = String.Format("INSERT INTO Car " +
                 "(RegistrationMark, Make, Model, TrimLevel, Mileage, Colour, Year, Price, Url, Location, DateAdded, MotExpiry) " +
                 "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", 
@@ -63,13 +63,13 @@ namespace CarCompareDesktop {
                 textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text, 
                 dateTimePicker_DateAdded.Text, textBox_MOT.Text);
 
-            SqlCar.ExecuteNonQuery(commandString);         
+            SqlCar.CreateDatabaseEntry(commandString);         
         }
         
         // UPDATING AN ENTRY
         // Right click Edit on a listview item ID number to populate the textbox fields
         private void editToolStripMenuItem1_Click(object sender, EventArgs e) {
-            button_EditRow.Enabled = true;
+            buttonUpdateCar.Enabled = true;
             for (int i = 0; i < textBoxes.Length; i++) {
                 if (i != textBoxes.Length-1) {
                     textBoxes[i].Text = listView1.SelectedItems[0].SubItems[i].Text;
@@ -80,12 +80,12 @@ namespace CarCompareDesktop {
         }
 
         // Then click the button to activate the method
-        private void button_EditRow_Click(object sender, EventArgs e) {
-            UpdateRow();
+        private void buttonUpdateCar_Click(object sender, EventArgs e) {
+            UpdateCar();
         }
 
         // The method collects the text from the textboxes and sends it to be processed on the SqlCar class
-        public void UpdateRow() {
+        public void UpdateCar() {
             string[] textBoxStrings = { textBox_ID.Text, textBox_Reg.Text, textBox_Make.Text, textBox_Model.Text, textBox_Trim.Text, textBox_Mileage.Text,
                 textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text,
                 dateTimePicker_DateAdded.Text, textBox_MOT.Text };
@@ -95,10 +95,10 @@ namespace CarCompareDesktop {
 
         // Right click to delete the entry in listview
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
-                DeleteRow();                     
+                DeleteCar();                     
         }
 
-        public void DeleteRow() {
+        public void DeleteCar() {
         DialogResult result = MessageBox.Show(
             "Are you sure you want to delete this entry?",
             "Important Question",
@@ -106,7 +106,7 @@ namespace CarCompareDesktop {
             MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes) {
-                SqlCar.ExecuteNonQuery(String.Format("DELETE FROM Car WHERE Id = '{0}'", listView1.SelectedItems[0].SubItems[0].Text));
+                SqlCar.DeleteDatabaseEntry(listView1.SelectedItems[0].SubItems[0].Text);
             }
         }
     }
