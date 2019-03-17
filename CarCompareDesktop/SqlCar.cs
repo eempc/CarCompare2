@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Windows.Forms;
+using System.Reflection;
 
 // It is possible to access Form1's controls from here but it is not a good idea. E.g. TextBox t = Application.OpenForms["Form1"].Controls["textBox1"] as TextBox;
 // It is better to use return values from this class to Form1
@@ -39,6 +37,10 @@ namespace CarCompareDesktop {
             this.location = location;
             this.dateAdded = dateAdded;
             this.mot = mot;
+        }
+
+        public SqlCar() {
+
         }
 
         public static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Evie\CarCompareContext-d1a204cc-6cb2-4983-b6ca-8e135f56615c.mdf;Integrated Security=True";
@@ -118,9 +120,32 @@ namespace CarCompareDesktop {
             connect.Close();
         }
 
-        public static async Task CreateDatabaseEntryAsync(string commandString) {
+        public static async Task CreateDatabaseEntryAsync(SqlCar newCar) {
+            List<string> columns = GetColumnNames();
+            columns.RemoveAt(0); // Remove id column as it is assigned automatically as opposed to if (str != "Id")
+            string cmdStrMiddle = String.Join(",", columns.ToArray());
+            cmdStrMiddle.TrimEnd(',');
+
+            List<string> carProperties = new List<string>();
+            foreach (PropertyInfo prop in newCar.GetType().GetProperties()) {
+                if (prop.Name != "id") {
+                    carProperties.Add("@_" + prop.Name);
+                }               
+            }
+            string cmdStrEnd = String.Join(",",carProperties.ToArray());
+            cmdStrEnd.TrimEnd(',');
+
             await connect.OpenAsync();
+
+            string commandString = String.Format("INSERT INTO Car (" + cmdStrMiddle + ") VALUES (" + cmdStrEnd + ")"); 
             SqlCommand command = new SqlCommand(commandString, connect);
+
+            foreach (PropertyInfo prop in newCar.GetType().GetProperties()) {
+                if (prop.Name != "id") {
+                    command.Parameters.AddWithValue("@_" + prop.Name, prop.GetValue(newCar, null));
+                }
+            }
+
             await command.ExecuteNonQueryAsync();
             connect.Close();
         }

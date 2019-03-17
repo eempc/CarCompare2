@@ -56,6 +56,20 @@ namespace CarCompareDesktop {
 
         // String format/interpolation method (bad because of SQL Injection)
         public async void CreateNewCar() {
+            SqlCar newCar = new SqlCar();
+            newCar.registration = textBox_Reg.Text;
+            newCar.make = textBox_Make.Text;
+            newCar.model = textBox_Model.Text;
+            newCar.trim = textBox_Trim.Text;
+            newCar.mileage = int.Parse(textBox_Mileage.Text);
+            newCar.colour = textBox_Colour.Text;
+            newCar.year = int.Parse(textBox_Year.Text);
+            newCar.price = decimal.Parse(textBox_Price.Text);
+            newCar.url = textBox_URL.Text;
+            newCar.location = textBox_Location.Text;
+            newCar.dateAdded = DateTime.Today;
+            newCar.mot = int.Parse(textBox_MOT.Text);
+
             string commandString = String.Format("INSERT INTO Car " +
                 "(RegistrationMark, Make, Model, TrimLevel, Mileage, Colour, Year, Price, Url, Location, DateAdded, MotExpiry) " +
                 "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", 
@@ -63,7 +77,7 @@ namespace CarCompareDesktop {
                 textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text, 
                 dateTimePicker_DateAdded.Text, textBox_MOT.Text);
 
-            await SqlCar.CreateDatabaseEntryAsync(commandString);         
+            await SqlCar.CreateDatabaseEntryAsync(newCar);         
         }
         
         // UPDATING AN ENTRY
