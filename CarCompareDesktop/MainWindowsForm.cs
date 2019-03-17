@@ -33,10 +33,10 @@ namespace CarCompareDesktop {
         }
 
         // Non-async method of querying database. Loops through the properties of an object via reflections, then put data into a ListView
-        public void DisplayAll() {
+        public async void DisplayAll() {
             listView1.Items.Clear();
 
-            List<SqlCar> myCars = SqlCar.ReadDatabase("SELECT * FROM Car");
+            List<SqlCar> myCars = await SqlCar.ReadDatabaseAsync("SELECT * FROM Car");
 
             foreach (var car in myCars) {
                 ListViewItem newItem = new ListViewItem(car.id.ToString());
@@ -63,7 +63,7 @@ namespace CarCompareDesktop {
                 textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text, 
                 dateTimePicker_DateAdded.Text, textBox_MOT.Text);
 
-            await SqlCar.CreateDatabaseEntry(commandString);         
+            await SqlCar.CreateDatabaseEntryAsync(commandString);         
         }
         
         // UPDATING AN ENTRY

@@ -60,12 +60,12 @@ namespace CarCompareDesktop {
             return columnNames;
         }
 
-        public static List<SqlCar> ReadDatabase(string commandString) {
+        public static async Task<List<SqlCar>> ReadDatabaseAsync(string commandString) {
             List<SqlCar> cars = new List<SqlCar>();
 
-            connect.Open();
+            await connect.OpenAsync();
             SqlCommand command = new SqlCommand(commandString, connect);
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             while (reader.Read()) {
                 cars.Add(
@@ -118,7 +118,7 @@ namespace CarCompareDesktop {
             connect.Close();
         }
 
-        public static async Task CreateDatabaseEntry(string commandString) {
+        public static async Task CreateDatabaseEntryAsync(string commandString) {
             await connect.OpenAsync();
             SqlCommand command = new SqlCommand(commandString, connect);
             await command.ExecuteNonQueryAsync();

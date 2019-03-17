@@ -26,7 +26,7 @@ namespace CarCompareDesktop {
                 // Independent work can go in here
                 string html = await getHtmlTask;
                 return html;
-                // string html = await client.GetStringAsync(url) // Shorter method
+                // string html = await client.GetStringAsync(url) // Shorter method if you don't need to do the two step version of setting up a task then executing it
             }
         }
     }
