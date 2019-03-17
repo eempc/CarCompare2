@@ -2,9 +2,9 @@ D:\Projects\CarCompareDesktop\CarCompareDesktop\bin\Debug\CarCompareDesktop.exe.
 D:\Projects\CarCompareDesktop\CarCompareDesktop\bin\Debug\CarCompareDesktop.exe
 D:\Projects\CarCompareDesktop\CarCompareDesktop\bin\Debug\CarCompareDesktop.pdb
 D:\Projects\CarCompareDesktop\CarCompareDesktop\obj\Debug\CarCompareDesktop.csprojAssemblyReference.cache
-D:\Projects\CarCompareDesktop\CarCompareDesktop\obj\Debug\CarCompareDesktop.Form1.resources
 D:\Projects\CarCompareDesktop\CarCompareDesktop\obj\Debug\CarCompareDesktop.Properties.Resources.resources
 D:\Projects\CarCompareDesktop\CarCompareDesktop\obj\Debug\CarCompareDesktop.csproj.GenerateResource.cache
 D:\Projects\CarCompareDesktop\CarCompareDesktop\obj\Debug\CarCompareDesktop.csproj.CoreCompileInputs.cache
 D:\Projects\CarCompareDesktop\CarCompareDesktop\obj\Debug\CarCompareDesktop.exe
 D:\Projects\CarCompareDesktop\CarCompareDesktop\obj\Debug\CarCompareDesktop.pdb
+D:\Projects\CarCompareDesktop\CarCompareDesktop\obj\Debug\CarCompareDesktop.MainWindowsForm.resources

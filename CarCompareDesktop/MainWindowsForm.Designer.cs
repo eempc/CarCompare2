@@ -1,5 +1,5 @@
 ﻿namespace CarCompareDesktop {
-    partial class Form1 {
+    partial class MainWindowsForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>

@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-// Move all SQL stuff to a new class later, i.e. aim is to remove System.Data.SqlClient. 
-// All this repeating connect.Open() stuff is readable but not clean
-// ListView1's headings should be programmatically added and not manually entered into the designer
-// SQL column DateAdded should be second column or last column
 
 namespace CarCompareDesktop {
-    public partial class Form1 : Form {
-        public Form1() {
+    public partial class MainWindowsForm : Form {
+        public MainWindowsForm() {
             InitializeComponent();
             StartMethod();
         }
@@ -28,12 +18,14 @@ namespace CarCompareDesktop {
             textBoxes = new TextBox[] {
                 textBox_ID, textBox_Reg, textBox_Make, textBox_Model, textBox_Trim, textBox_Mileage, textBox_Colour,
                 textBox_Year, textBox_Price, textBox_URL, textBox_Location, textBox_MOT
-             };
+            };
 
             button_EditRow.Enabled = false;
         }
         
-        private void button1_Click(object sender, EventArgs e) {
+        private async void button1_Click(object sender, EventArgs e) {
+            string html = await WebScraper.GetHtmlViaHttpClientAsync(@"http://eempc.github.io/index.html");
+            textBoxTest.AppendText(html);
         }
 
         private void buttonDisplayAll_Click(object sender, EventArgs e) {
