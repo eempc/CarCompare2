@@ -4,9 +4,6 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Reflection;
 
-// It is possible to access Form1's controls from here but it is not a good idea. E.g. TextBox t = Application.OpenForms["Form1"].Controls["textBox1"] as TextBox;
-// It is better to use return values from this class to Form1
-
 namespace CarCompareDesktop {
     public class SqlCar {        
         public int id { get; set; }
@@ -66,6 +63,7 @@ namespace CarCompareDesktop {
             List<SqlCar> cars = new List<SqlCar>();
 
             await connect.OpenAsync();
+
             SqlCommand command = new SqlCommand(commandString, connect);
             SqlDataReader reader = await command.ExecuteReaderAsync();
 
@@ -126,13 +124,13 @@ namespace CarCompareDesktop {
             string cmdStrMiddle = String.Join(",", columns.ToArray());
             cmdStrMiddle.TrimEnd(',');
 
-            List<string> carProperties = new List<string>();
+            List<string> carPropertiesNames = new List<string>();
             foreach (PropertyInfo prop in newCar.GetType().GetProperties()) {
                 if (prop.Name != "id") {
-                    carProperties.Add("@_" + prop.Name);
+                    carPropertiesNames.Add("@_" + prop.Name);
                 }               
             }
-            string cmdStrEnd = String.Join(",",carProperties.ToArray());
+            string cmdStrEnd = String.Join(",",carPropertiesNames.ToArray());
             cmdStrEnd.TrimEnd(',');
 
             await connect.OpenAsync();
@@ -157,5 +155,36 @@ namespace CarCompareDesktop {
             deleter.ExecuteNonQuery();
             connect.Close();
         }
+
+        public static List<SqlCar> ReadDatabaseByCondition() {
+            List<SqlCar> cars = new List<SqlCar>();
+            using (connect) {
+                connect.Open();
+                SqlCommand command = new SqlCommand("SELECT * FROM Car WHERE Price > 500 AND Price <3000", connect);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read()) {
+                    cars.Add(
+                        new SqlCar(
+                            reader.GetInt32(0),
+                            reader.GetString(1),
+                            reader.GetString(2),
+                            reader.GetString(3),
+                            reader.GetString(4),
+                            reader.GetInt32(5),
+                            reader.GetString(6),
+                            reader.GetInt32(7),
+                            reader.GetDecimal(8),
+                            reader.GetString(9),
+                            reader.GetString(10),
+                            reader.GetDateTime(11),
+                            reader.GetInt32(12)
+                        )
+                    );
+                }
+                reader.Close();
+            }
+            return cars;
+        }
+
     }
 }

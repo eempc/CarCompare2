@@ -11,9 +11,12 @@ namespace CarCompareDesktop {
             StartMethod();
         }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) => Application.Exit();
+
         TextBox[] textBoxes;
         List<string> columnNames = new List<string>();
-        
+        List<SqlCar> myCars = new List<SqlCar>();
+
         public void StartMethod() {
             textBoxes = new TextBox[] {
                 textBox_ID, textBox_Reg, textBox_Make, textBox_Model, textBox_Trim, textBox_Mileage, textBox_Colour,
@@ -23,9 +26,14 @@ namespace CarCompareDesktop {
             buttonUpdateCar.Enabled = false;
         }
         
-        private async void button1_Click(object sender, EventArgs e) {
-            string html = await WebScraper.GetHtmlViaHttpClientAsync(@"http://eempc.github.io/index.html");
-            textBoxTest.AppendText(html);
+        // Test button
+        private void button1_Click(object sender, EventArgs e) {
+            //string html = await WebScraper.GetHtmlViaHttpClientAsync(@"http://eempc.github.io/index.html");
+            List<SqlCar> carList = SqlCar.ReadDatabaseByCondition();
+            foreach (SqlCar car in carList) {
+                textBoxTest.AppendText(car.registration + " " + car.price + Environment.NewLine);
+            }
+            
         }
 
         private void buttonDisplayAll_Click(object sender, EventArgs e) {
@@ -36,46 +44,37 @@ namespace CarCompareDesktop {
         public async void DisplayAll() {
             listView1.Items.Clear();
 
-            List<SqlCar> myCars = await SqlCar.ReadDatabaseAsync("SELECT * FROM Car");
+            myCars = await SqlCar.ReadDatabaseAsync("SELECT * FROM Car");
 
             foreach (var car in myCars) {
                 ListViewItem newItem = new ListViewItem(car.id.ToString());
                 foreach (PropertyInfo prop in car.GetType().GetProperties()) {
-                    if (prop.Name != "id")
-                        newItem.SubItems.Add(prop.GetValue(car, null).ToString());
+                    if (prop.Name != "id") newItem.SubItems.Add(prop.GetValue(car, null).ToString());
                 }
                 listView1.Items.Add(newItem);
             }
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e) => Application.Exit();
-
-        private void buttonCreateCar_Click(object sender, EventArgs e) {
+        private void buttonCreateCar_Click_1(object sender, EventArgs e) {
             CreateNewCar();
         }
 
-        // String format/interpolation method (bad because of SQL Injection)
         public async void CreateNewCar() {
             SqlCar newCar = new SqlCar();
-            newCar.registration = textBox_Reg.Text;
-            newCar.make = textBox_Make.Text;
-            newCar.model = textBox_Model.Text;
-            newCar.trim = textBox_Trim.Text;
-            newCar.mileage = int.Parse(textBox_Mileage.Text);
-            newCar.colour = textBox_Colour.Text;
-            newCar.year = int.Parse(textBox_Year.Text);
-            newCar.price = decimal.Parse(textBox_Price.Text);
-            newCar.url = textBox_URL.Text;
-            newCar.location = textBox_Location.Text;
+            newCar.registration = textBoxNewReg.Text;
+            newCar.make = textBoxNewMake.Text;
+            newCar.model = textBoxNewModel.Text;
+            newCar.trim = textBoxNewTrim.Text;
+            newCar.mileage = int.Parse(textBoxNewMileage.Text);
+            newCar.colour = textBoxNewColour.Text;
+            newCar.year = int.Parse(textBoxNewYear.Text);
+            newCar.price = decimal.Parse(textBoxNewPrice.Text);
+            newCar.url = textBoxNewURL.Text;
+            newCar.location = textBoxNewLocation.Text;
             newCar.dateAdded = DateTime.Today;
-            newCar.mot = int.Parse(textBox_MOT.Text);
+            newCar.mot = int.Parse(textBoxNewMOT.Text);
 
-            string commandString = String.Format("INSERT INTO Car " +
-                "(RegistrationMark, Make, Model, TrimLevel, Mileage, Colour, Year, Price, Url, Location, DateAdded, MotExpiry) " +
-                "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", 
-                textBox_Reg.Text, textBox_Make.Text, textBox_Model.Text, textBox_Trim.Text, textBox_Mileage.Text, 
-                textBox_Colour.Text, textBox_Year.Text, textBox_Price.Text, textBox_URL.Text, textBox_Location.Text, 
-                dateTimePicker_DateAdded.Text, textBox_MOT.Text);
+                // TODO - Insert here: a check for duplicate cars via registration number before calling the DB
 
             await SqlCar.CreateDatabaseEntryAsync(newCar);         
         }
@@ -109,7 +108,7 @@ namespace CarCompareDesktop {
 
         // Right click to delete the entry in listview
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
-                DeleteCar();                     
+            DeleteCar();                     
         }
 
         public void DeleteCar() {
@@ -127,5 +126,7 @@ namespace CarCompareDesktop {
         public void DeleteByCriteria() {
 
         }
+
+
     }
 }

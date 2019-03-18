@@ -13,13 +13,13 @@ using System.Net.Http;
 namespace CarCompareDesktop {
     class WebScraper {
 
-        //Non-async simple web client call (can include local files)
+        // Simple web client call (can include local files)
         public static string GetHtmlViaWebClient(string url) {
             WebClient client = new WebClient();
             return client.DownloadString(url);
         }
 
-        // 'Async' should be in the method name - url must be an HTTP request
+        // URL must be HTTP
         public static async Task<string> GetHtmlViaHttpClientAsync(string url) {
             using (HttpClient client = new HttpClient()) {
                 Task<string> getHtmlTask = client.GetStringAsync(url);

@@ -37,7 +37,6 @@
             this.textBox_ID = new System.Windows.Forms.TextBox();
             this.label0 = new System.Windows.Forms.Label();
             this.dateTimePicker_DateAdded = new System.Windows.Forms.DateTimePicker();
-            this.buttonCreateCar = new System.Windows.Forms.Button();
             this.textBox_MOT = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -84,10 +83,38 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dateTimePickerNewDate = new System.Windows.Forms.DateTimePicker();
+            this.textBoxNewMOT = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBoxNewLocation = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBoxNewURL = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBoxNewPrice = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBoxNewYear = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBoxNewColour = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBoxNewMileage = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBoxNewTrim = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBoxNewModel = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textBoxNewMake = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBoxNewReg = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.buttonCreateCar = new System.Windows.Forms.Button();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -133,6 +160,8 @@
             // statusStrip1
             // 
             this.statusStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 574);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1067, 22);
@@ -160,7 +189,6 @@
             this.tabPage1.Controls.Add(this.textBox_ID);
             this.tabPage1.Controls.Add(this.label0);
             this.tabPage1.Controls.Add(this.dateTimePicker_DateAdded);
-            this.tabPage1.Controls.Add(this.buttonCreateCar);
             this.tabPage1.Controls.Add(this.textBox_MOT);
             this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.label11);
@@ -197,7 +225,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(733, 284);
+            this.button1.Location = new System.Drawing.Point(939, 441);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 56;
@@ -207,7 +235,7 @@
             // 
             // buttonUpdateCar
             // 
-            this.buttonUpdateCar.Location = new System.Drawing.Point(691, 386);
+            this.buttonUpdateCar.Location = new System.Drawing.Point(328, 495);
             this.buttonUpdateCar.Name = "buttonUpdateCar";
             this.buttonUpdateCar.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdateCar.TabIndex = 55;
@@ -228,9 +256,9 @@
             this.label0.AutoSize = true;
             this.label0.Location = new System.Drawing.Point(249, 294);
             this.label0.Name = "label0";
-            this.label0.Size = new System.Drawing.Size(35, 13);
+            this.label0.Size = new System.Drawing.Size(38, 13);
             this.label0.TabIndex = 53;
-            this.label0.Text = "label0";
+            this.label0.Text = "ID No.";
             // 
             // dateTimePicker_DateAdded
             // 
@@ -238,16 +266,6 @@
             this.dateTimePicker_DateAdded.Name = "dateTimePicker_DateAdded";
             this.dateTimePicker_DateAdded.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker_DateAdded.TabIndex = 52;
-            // 
-            // buttonCreateCar
-            // 
-            this.buttonCreateCar.Location = new System.Drawing.Point(679, 461);
-            this.buttonCreateCar.Name = "buttonCreateCar";
-            this.buttonCreateCar.Size = new System.Drawing.Size(129, 23);
-            this.buttonCreateCar.TabIndex = 51;
-            this.buttonCreateCar.Text = "Add New Car";
-            this.buttonCreateCar.UseVisualStyleBackColor = true;
-            this.buttonCreateCar.Click += new System.EventHandler(this.buttonCreateCar_Click);
             // 
             // textBox_MOT
             // 
@@ -262,18 +280,18 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(372, 467);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
+            this.label12.Size = new System.Drawing.Size(48, 13);
             this.label12.TabIndex = 49;
-            this.label12.Text = "label12";
+            this.label12.Text = "MOT left";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(372, 441);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 13);
+            this.label11.Size = new System.Drawing.Size(64, 13);
             this.label11.TabIndex = 48;
-            this.label11.Text = "label11";
+            this.label11.Text = "Date Added";
             // 
             // textBox_Location
             // 
@@ -288,9 +306,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(372, 415);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 13);
+            this.label10.Size = new System.Drawing.Size(48, 13);
             this.label10.TabIndex = 46;
-            this.label10.Text = "label10";
+            this.label10.Text = "Location";
             // 
             // textBox_URL
             // 
@@ -305,9 +323,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(372, 389);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 13);
+            this.label9.Size = new System.Drawing.Size(29, 13);
             this.label9.TabIndex = 44;
-            this.label9.Text = "label9";
+            this.label9.Text = "URL";
             // 
             // textBox_Price
             // 
@@ -322,9 +340,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(372, 363);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.Size = new System.Drawing.Size(31, 13);
             this.label8.TabIndex = 42;
-            this.label8.Text = "label8";
+            this.label8.Text = "Price";
             // 
             // textBox_Year
             // 
@@ -339,9 +357,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(372, 334);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.Size = new System.Drawing.Size(29, 13);
             this.label7.TabIndex = 40;
-            this.label7.Text = "label7";
+            this.label7.Text = "Year";
             // 
             // textBox_Colour
             // 
@@ -356,9 +374,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(99, 464);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.Size = new System.Drawing.Size(37, 13);
             this.label6.TabIndex = 38;
-            this.label6.Text = "label6";
+            this.label6.Text = "Colour";
             // 
             // textBox_Mileage
             // 
@@ -373,9 +391,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(99, 438);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 36;
-            this.label5.Text = "label5";
+            this.label5.Text = "Miles";
             // 
             // textBox_Trim
             // 
@@ -390,9 +408,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(99, 412);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.Size = new System.Drawing.Size(27, 13);
             this.label4.TabIndex = 34;
-            this.label4.Text = "label4";
+            this.label4.Text = "Trim";
             // 
             // textBox_Model
             // 
@@ -407,9 +425,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(99, 386);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 32;
-            this.label3.Text = "label3";
+            this.label3.Text = "Model";
             // 
             // textBox_Make
             // 
@@ -424,9 +442,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(99, 360);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 30;
-            this.label2.Text = "label2";
+            this.label2.Text = "Make";
             // 
             // textBox_Reg
             // 
@@ -441,9 +459,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(99, 334);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 28;
-            this.label1.Text = "label1";
+            this.label1.Text = "Reg";
             // 
             // buttonDisplayAll
             // 
@@ -474,7 +492,7 @@
             this.listView1.ContextMenuStrip = this.contextMenuStrip1;
             this.listView1.Location = new System.Drawing.Point(8, 45);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(800, 211);
+            this.listView1.Size = new System.Drawing.Size(1043, 211);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -555,10 +573,10 @@
             // 
             // textBoxTest
             // 
-            this.textBoxTest.Location = new System.Drawing.Point(814, 45);
+            this.textBoxTest.Location = new System.Drawing.Point(903, 262);
             this.textBoxTest.Multiline = true;
             this.textBoxTest.Name = "textBoxTest";
-            this.textBoxTest.Size = new System.Drawing.Size(237, 370);
+            this.textBoxTest.Size = new System.Drawing.Size(148, 153);
             this.textBoxTest.TabIndex = 1;
             // 
             // toolStrip1
@@ -572,13 +590,38 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.Gray;
+            this.tabPage2.Controls.Add(this.buttonCreateCar);
+            this.tabPage2.Controls.Add(this.dateTimePickerNewDate);
+            this.tabPage2.Controls.Add(this.textBoxNewMOT);
+            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.textBoxNewLocation);
+            this.tabPage2.Controls.Add(this.label15);
+            this.tabPage2.Controls.Add(this.textBoxNewURL);
+            this.tabPage2.Controls.Add(this.label16);
+            this.tabPage2.Controls.Add(this.textBoxNewPrice);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.textBoxNewYear);
+            this.tabPage2.Controls.Add(this.label18);
+            this.tabPage2.Controls.Add(this.textBoxNewColour);
+            this.tabPage2.Controls.Add(this.label19);
+            this.tabPage2.Controls.Add(this.textBoxNewMileage);
+            this.tabPage2.Controls.Add(this.label20);
+            this.tabPage2.Controls.Add(this.textBoxNewTrim);
+            this.tabPage2.Controls.Add(this.label21);
+            this.tabPage2.Controls.Add(this.textBoxNewModel);
+            this.tabPage2.Controls.Add(this.label22);
+            this.tabPage2.Controls.Add(this.textBoxNewMake);
+            this.tabPage2.Controls.Add(this.label23);
+            this.tabPage2.Controls.Add(this.textBoxNewReg);
+            this.tabPage2.Controls.Add(this.label24);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1059, 524);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Add";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -592,13 +635,233 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.BackColor = System.Drawing.Color.Gray;
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(1059, 524);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "tabPage4";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPage4.Text = "Delete (advanced)";
+            // 
+            // dateTimePickerNewDate
+            // 
+            this.dateTimePickerNewDate.Enabled = false;
+            this.dateTimePickerNewDate.Location = new System.Drawing.Point(596, 296);
+            this.dateTimePickerNewDate.Name = "dateTimePickerNewDate";
+            this.dateTimePickerNewDate.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerNewDate.TabIndex = 76;
+            // 
+            // textBoxNewMOT
+            // 
+            this.textBoxNewMOT.Location = new System.Drawing.Point(596, 319);
+            this.textBoxNewMOT.Name = "textBoxNewMOT";
+            this.textBoxNewMOT.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewMOT.TabIndex = 75;
+            this.textBoxNewMOT.Text = "12";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(535, 322);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(48, 13);
+            this.label13.TabIndex = 74;
+            this.label13.Text = "MOT left";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(535, 296);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(64, 13);
+            this.label14.TabIndex = 73;
+            this.label14.Text = "Date Added";
+            // 
+            // textBoxNewLocation
+            // 
+            this.textBoxNewLocation.Location = new System.Drawing.Point(596, 267);
+            this.textBoxNewLocation.Name = "textBoxNewLocation";
+            this.textBoxNewLocation.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewLocation.TabIndex = 72;
+            this.textBoxNewLocation.Text = "Bristol";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(535, 270);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(48, 13);
+            this.label15.TabIndex = 71;
+            this.label15.Text = "Location";
+            // 
+            // textBoxNewURL
+            // 
+            this.textBoxNewURL.Location = new System.Drawing.Point(596, 241);
+            this.textBoxNewURL.Name = "textBoxNewURL";
+            this.textBoxNewURL.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewURL.TabIndex = 70;
+            this.textBoxNewURL.Text = "http://something";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(535, 244);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(29, 13);
+            this.label16.TabIndex = 69;
+            this.label16.Text = "URL";
+            // 
+            // textBoxNewPrice
+            // 
+            this.textBoxNewPrice.Location = new System.Drawing.Point(596, 215);
+            this.textBoxNewPrice.Name = "textBoxNewPrice";
+            this.textBoxNewPrice.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewPrice.TabIndex = 68;
+            this.textBoxNewPrice.Text = "215";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(535, 218);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(31, 13);
+            this.label17.TabIndex = 67;
+            this.label17.Text = "Price";
+            // 
+            // textBoxNewYear
+            // 
+            this.textBoxNewYear.Location = new System.Drawing.Point(596, 186);
+            this.textBoxNewYear.Name = "textBoxNewYear";
+            this.textBoxNewYear.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewYear.TabIndex = 66;
+            this.textBoxNewYear.Text = "2017";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(535, 189);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(29, 13);
+            this.label18.TabIndex = 65;
+            this.label18.Text = "Year";
+            // 
+            // textBoxNewColour
+            // 
+            this.textBoxNewColour.Location = new System.Drawing.Point(323, 316);
+            this.textBoxNewColour.Name = "textBoxNewColour";
+            this.textBoxNewColour.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewColour.TabIndex = 64;
+            this.textBoxNewColour.Text = "White";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(262, 319);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(37, 13);
+            this.label19.TabIndex = 63;
+            this.label19.Text = "Colour";
+            // 
+            // textBoxNewMileage
+            // 
+            this.textBoxNewMileage.Location = new System.Drawing.Point(323, 290);
+            this.textBoxNewMileage.Name = "textBoxNewMileage";
+            this.textBoxNewMileage.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewMileage.TabIndex = 62;
+            this.textBoxNewMileage.Text = "2222";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(262, 293);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(31, 13);
+            this.label20.TabIndex = 61;
+            this.label20.Text = "Miles";
+            // 
+            // textBoxNewTrim
+            // 
+            this.textBoxNewTrim.Location = new System.Drawing.Point(323, 264);
+            this.textBoxNewTrim.Name = "textBoxNewTrim";
+            this.textBoxNewTrim.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewTrim.TabIndex = 60;
+            this.textBoxNewTrim.Text = "D";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(262, 267);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(27, 13);
+            this.label21.TabIndex = 59;
+            this.label21.Text = "Trim";
+            // 
+            // textBoxNewModel
+            // 
+            this.textBoxNewModel.Location = new System.Drawing.Point(323, 238);
+            this.textBoxNewModel.Name = "textBoxNewModel";
+            this.textBoxNewModel.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewModel.TabIndex = 58;
+            this.textBoxNewModel.Text = "A3";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(262, 241);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(36, 13);
+            this.label22.TabIndex = 57;
+            this.label22.Text = "Model";
+            // 
+            // textBoxNewMake
+            // 
+            this.textBoxNewMake.Location = new System.Drawing.Point(323, 212);
+            this.textBoxNewMake.Name = "textBoxNewMake";
+            this.textBoxNewMake.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewMake.TabIndex = 56;
+            this.textBoxNewMake.Text = "Audi";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(262, 215);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(34, 13);
+            this.label23.TabIndex = 55;
+            this.label23.Text = "Make";
+            // 
+            // textBoxNewReg
+            // 
+            this.textBoxNewReg.Location = new System.Drawing.Point(323, 186);
+            this.textBoxNewReg.Name = "textBoxNewReg";
+            this.textBoxNewReg.Size = new System.Drawing.Size(185, 20);
+            this.textBoxNewReg.TabIndex = 54;
+            this.textBoxNewReg.Text = "AA33 UUU";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(262, 189);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(27, 13);
+            this.label24.TabIndex = 53;
+            this.label24.Text = "Reg";
+            // 
+            // buttonCreateCar
+            // 
+            this.buttonCreateCar.Location = new System.Drawing.Point(498, 379);
+            this.buttonCreateCar.Name = "buttonCreateCar";
+            this.buttonCreateCar.Size = new System.Drawing.Size(129, 23);
+            this.buttonCreateCar.TabIndex = 77;
+            this.buttonCreateCar.Text = "Add New Car";
+            this.buttonCreateCar.UseVisualStyleBackColor = true;
+            this.buttonCreateCar.Click += new System.EventHandler(this.buttonCreateCar_Click_1);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // MainWindowsForm
             // 
@@ -613,10 +876,14 @@
             this.Text = "Car Compare Desktop";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -655,7 +922,6 @@
         private System.Windows.Forms.TextBox textBox_ID;
         private System.Windows.Forms.Label label0;
         private System.Windows.Forms.DateTimePicker dateTimePicker_DateAdded;
-        private System.Windows.Forms.Button buttonCreateCar;
         private System.Windows.Forms.TextBox textBox_MOT;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
@@ -684,6 +950,32 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.Button buttonUpdateCar;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonCreateCar;
+        private System.Windows.Forms.DateTimePicker dateTimePickerNewDate;
+        private System.Windows.Forms.TextBox textBoxNewMOT;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBoxNewLocation;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBoxNewURL;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBoxNewPrice;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBoxNewYear;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBoxNewColour;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox textBoxNewMileage;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBoxNewTrim;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox textBoxNewModel;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox textBoxNewMake;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textBoxNewReg;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 
