@@ -42,11 +42,13 @@ namespace CarCompareDesktop {
 
         // Non-async method of querying database. Loops through the properties of an object via reflections, then put data into a ListView
         public async void DisplayAll() {
-            listView1.Items.Clear();
-
             myCars = await SqlCar.ReadDatabaseAsync("SELECT * FROM Car");
+            PopulateListView(myCars);
+        }
 
-            foreach (var car in myCars) {
+        public void PopulateListView(List<SqlCar> carList) {
+            listView1.Items.Clear();
+            foreach (var car in carList) {
                 ListViewItem newItem = new ListViewItem(car.id.ToString());
                 foreach (PropertyInfo prop in car.GetType().GetProperties()) {
                     if (prop.Name != "id") newItem.SubItems.Add(prop.GetValue(car, null).ToString());
@@ -54,6 +56,8 @@ namespace CarCompareDesktop {
                 listView1.Items.Add(newItem);
             }
         }
+
+        // CREATE
 
         private void buttonCreateCar_Click_1(object sender, EventArgs e) {
             CreateNewCar();
@@ -127,6 +131,35 @@ namespace CarCompareDesktop {
 
         }
 
+        // Sorting by selecting an option in the combo box, sort by price (asc/desc)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+            int index = comboBox1.SelectedIndex;
+            switch (index) {
+                case 0:
+                    // Try comparison delegate even though it looks weird
+                    myCars.Sort((x, y) => x.price.CompareTo(y.price));
+                    PopulateListView(myCars);
+                    toolStripStatusLabel1.Text = "Sorted by price (ascending)";
+                    break;
+                case 1:
+                    myCars.Sort((y, x) => x.price.CompareTo(y.price));
+                    PopulateListView(myCars);
+                    toolStripStatusLabel1.Text = "Sorted by price (descending)";
+                    break;
+                case 2:
+                    myCars.Sort((x, y) => x.year.CompareTo(y.year));
+                    PopulateListView(myCars);
+                    toolStripStatusLabel1.Text = "Sorted by year (asc)";
+                    break;
+                case 3:
+                    myCars.Sort((y, x) => x.year.CompareTo(y.year));
+                    PopulateListView(myCars);
+                    toolStripStatusLabel1.Text = "Sorted by year (desc)";
+                    break;
+                default:
+                    break;
 
+            }
+        }
     }
 }

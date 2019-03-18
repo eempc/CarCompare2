@@ -40,6 +40,7 @@ namespace CarCompareDesktop {
 
         }
 
+        // An instanceof the sql connection, only one can be active at a time?
         public static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Evie\CarCompareContext-d1a204cc-6cb2-4983-b6ca-8e135f56615c.mdf;Integrated Security=True";
         public static SqlConnection connect = new SqlConnection(connectionString);
 
@@ -158,31 +159,31 @@ namespace CarCompareDesktop {
 
         public static List<SqlCar> ReadDatabaseByCondition() {
             List<SqlCar> cars = new List<SqlCar>();
-            using (connect) {
-                connect.Open();
-                SqlCommand command = new SqlCommand("SELECT * FROM Car WHERE Price > 500 AND Price <3000", connect);
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read()) {
-                    cars.Add(
-                        new SqlCar(
-                            reader.GetInt32(0),
-                            reader.GetString(1),
-                            reader.GetString(2),
-                            reader.GetString(3),
-                            reader.GetString(4),
-                            reader.GetInt32(5),
-                            reader.GetString(6),
-                            reader.GetInt32(7),
-                            reader.GetDecimal(8),
-                            reader.GetString(9),
-                            reader.GetString(10),
-                            reader.GetDateTime(11),
-                            reader.GetInt32(12)
-                        )
-                    );
-                }
-                reader.Close();
+
+            connect.Open();
+            SqlCommand command = new SqlCommand("SELECT * FROM Car WHERE Price>500 AND Price<3000", connect);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read()) {
+                cars.Add(
+                    new SqlCar(
+                        reader.GetInt32(0),
+                        reader.GetString(1),
+                        reader.GetString(2),
+                        reader.GetString(3),
+                        reader.GetString(4),
+                        reader.GetInt32(5),
+                        reader.GetString(6),
+                        reader.GetInt32(7),
+                        reader.GetDecimal(8),
+                        reader.GetString(9),
+                        reader.GetString(10),
+                        reader.GetDateTime(11),
+                        reader.GetInt32(12)
+                    )
+                );
             }
+            reader.Close();
+            connect.Close();
             return cars;
         }
 
