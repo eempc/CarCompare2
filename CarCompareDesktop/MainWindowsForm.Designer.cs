@@ -30,8 +30,10 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonUpdateCar = new System.Windows.Forms.Button();
             this.textBox_ID = new System.Windows.Forms.TextBox();
@@ -81,10 +83,9 @@
             this.textBoxTest = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.numericUpDownMOT = new System.Windows.Forms.NumericUpDown();
+            this.buttonCreateCar = new System.Windows.Forms.Button();
             this.dateTimePickerNewDate = new System.Windows.Forms.DateTimePicker();
-            this.textBoxNewMOT = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxNewLocation = new System.Windows.Forms.TextBox();
@@ -93,7 +94,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxNewPrice = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBoxNewYear = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxNewColour = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -107,17 +107,17 @@
             this.label23 = new System.Windows.Forms.Label();
             this.textBoxNewReg = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.buttonCreateCar = new System.Windows.Forms.Button();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.numericUpDownYear = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMOT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYear)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -170,6 +170,12 @@
             this.statusStrip1.Size = new System.Drawing.Size(1067, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // tabControl1
             // 
@@ -226,6 +232,20 @@
             this.tabPage1.Size = new System.Drawing.Size(1059, 524);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Display Database";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "price (asc)",
+            "price (desc)",
+            "year (asc)",
+            "year (desc)"});
+            this.comboBox1.Location = new System.Drawing.Point(104, 263);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(182, 21);
+            this.comboBox1.TabIndex = 57;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -584,10 +604,10 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Gray;
-            this.tabPage2.Controls.Add(this.numericUpDown1);
+            this.tabPage2.Controls.Add(this.numericUpDownYear);
+            this.tabPage2.Controls.Add(this.numericUpDownMOT);
             this.tabPage2.Controls.Add(this.buttonCreateCar);
             this.tabPage2.Controls.Add(this.dateTimePickerNewDate);
-            this.tabPage2.Controls.Add(this.textBoxNewMOT);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.textBoxNewLocation);
@@ -596,7 +616,6 @@
             this.tabPage2.Controls.Add(this.label16);
             this.tabPage2.Controls.Add(this.textBoxNewPrice);
             this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.textBoxNewYear);
             this.tabPage2.Controls.Add(this.label18);
             this.tabPage2.Controls.Add(this.textBoxNewColour);
             this.tabPage2.Controls.Add(this.label19);
@@ -617,25 +636,27 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Add";
             // 
-            // tabPage3
+            // numericUpDownMOT
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1059, 524);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Update";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.numericUpDownMOT.Location = new System.Drawing.Point(596, 320);
+            this.numericUpDownMOT.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.numericUpDownMOT.Name = "numericUpDownMOT";
+            this.numericUpDownMOT.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownMOT.TabIndex = 78;
             // 
-            // tabPage4
+            // buttonCreateCar
             // 
-            this.tabPage4.BackColor = System.Drawing.Color.Gray;
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1059, 524);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Delete (advanced)";
+            this.buttonCreateCar.Location = new System.Drawing.Point(498, 379);
+            this.buttonCreateCar.Name = "buttonCreateCar";
+            this.buttonCreateCar.Size = new System.Drawing.Size(129, 23);
+            this.buttonCreateCar.TabIndex = 77;
+            this.buttonCreateCar.Text = "Add New Car";
+            this.buttonCreateCar.UseVisualStyleBackColor = true;
+            this.buttonCreateCar.Click += new System.EventHandler(this.buttonCreateCar_Click_1);
             // 
             // dateTimePickerNewDate
             // 
@@ -644,14 +665,6 @@
             this.dateTimePickerNewDate.Name = "dateTimePickerNewDate";
             this.dateTimePickerNewDate.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerNewDate.TabIndex = 76;
-            // 
-            // textBoxNewMOT
-            // 
-            this.textBoxNewMOT.Location = new System.Drawing.Point(596, 319);
-            this.textBoxNewMOT.Name = "textBoxNewMOT";
-            this.textBoxNewMOT.Size = new System.Drawing.Size(51, 20);
-            this.textBoxNewMOT.TabIndex = 75;
-            this.textBoxNewMOT.Text = "12";
             // 
             // label13
             // 
@@ -678,6 +691,7 @@
             this.textBoxNewLocation.Size = new System.Drawing.Size(185, 20);
             this.textBoxNewLocation.TabIndex = 72;
             this.textBoxNewLocation.Text = "Bristol";
+            this.textBoxNewLocation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNewLocation_KeyPress);
             // 
             // label15
             // 
@@ -722,14 +736,6 @@
             this.label17.TabIndex = 67;
             this.label17.Text = "Price";
             // 
-            // textBoxNewYear
-            // 
-            this.textBoxNewYear.Location = new System.Drawing.Point(596, 186);
-            this.textBoxNewYear.Name = "textBoxNewYear";
-            this.textBoxNewYear.Size = new System.Drawing.Size(185, 20);
-            this.textBoxNewYear.TabIndex = 66;
-            this.textBoxNewYear.Text = "2017";
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -763,6 +769,7 @@
             this.textBoxNewMileage.Size = new System.Drawing.Size(185, 20);
             this.textBoxNewMileage.TabIndex = 62;
             this.textBoxNewMileage.Text = "2222";
+            this.textBoxNewMileage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNewMileage_KeyPress);
             // 
             // label20
             // 
@@ -826,6 +833,7 @@
             // 
             // textBoxNewReg
             // 
+            this.textBoxNewReg.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBoxNewReg.Location = new System.Drawing.Point(323, 186);
             this.textBoxNewReg.Name = "textBoxNewReg";
             this.textBoxNewReg.Size = new System.Drawing.Size(185, 20);
@@ -841,42 +849,47 @@
             this.label24.TabIndex = 53;
             this.label24.Text = "Reg";
             // 
-            // buttonCreateCar
+            // tabPage3
             // 
-            this.buttonCreateCar.Location = new System.Drawing.Point(498, 379);
-            this.buttonCreateCar.Name = "buttonCreateCar";
-            this.buttonCreateCar.Size = new System.Drawing.Size(129, 23);
-            this.buttonCreateCar.TabIndex = 77;
-            this.buttonCreateCar.Text = "Add New Car";
-            this.buttonCreateCar.UseVisualStyleBackColor = true;
-            this.buttonCreateCar.Click += new System.EventHandler(this.buttonCreateCar_Click_1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1059, 524);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Update";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // toolStripStatusLabel1
+            // tabPage4
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.tabPage4.BackColor = System.Drawing.Color.Gray;
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1059, 524);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Delete (advanced)";
             // 
-            // numericUpDown1
+            // numericUpDownYear
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(653, 319);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 78;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "price (asc)",
-            "price (desc)",
-            "year (asc)",
-            "year (desc)"});
-            this.comboBox1.Location = new System.Drawing.Point(104, 263);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(182, 21);
-            this.comboBox1.TabIndex = 57;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.numericUpDownYear.Location = new System.Drawing.Point(596, 187);
+            this.numericUpDownYear.Maximum = new decimal(new int[] {
+            2020,
+            0,
+            0,
+            0});
+            this.numericUpDownYear.Minimum = new decimal(new int[] {
+            1990,
+            0,
+            0,
+            0});
+            this.numericUpDownYear.Name = "numericUpDownYear";
+            this.numericUpDownYear.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownYear.TabIndex = 79;
+            this.numericUpDownYear.Value = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
             // 
             // MainWindowsForm
             // 
@@ -899,7 +912,8 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMOT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -968,7 +982,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonCreateCar;
         private System.Windows.Forms.DateTimePicker dateTimePickerNewDate;
-        private System.Windows.Forms.TextBox textBoxNewMOT;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBoxNewLocation;
@@ -977,7 +990,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBoxNewPrice;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBoxNewYear;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox textBoxNewColour;
         private System.Windows.Forms.Label label19;
@@ -992,8 +1004,9 @@
         private System.Windows.Forms.TextBox textBoxNewReg;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownMOT;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.NumericUpDown numericUpDownYear;
     }
 }
 

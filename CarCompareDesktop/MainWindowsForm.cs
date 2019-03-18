@@ -24,16 +24,25 @@ namespace CarCompareDesktop {
             };
 
             buttonUpdateCar.Enabled = false;
+
+            // Auto suggestions for car makes, awesome
+            var carMakes = new AutoCompleteStringCollection();
+            carMakes.AddRange(Validations.carManufacturers);
+            textBoxNewMake.AutoCompleteCustomSource = carMakes;
+            textBoxNewMake.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            textBoxNewMake.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            textBoxNewMake.Visible = true;
         }
         
         // Test button
         private void button1_Click(object sender, EventArgs e) {
             //string html = await WebScraper.GetHtmlViaHttpClientAsync(@"http://eempc.github.io/index.html");
-            List<SqlCar> carList = SqlCar.ReadDatabaseByCondition();
-            foreach (SqlCar car in carList) {
-                textBoxTest.AppendText(car.registration + " " + car.price + Environment.NewLine);
-            }
-            
+            //List<SqlCar> carList = SqlCar.ReadDatabaseByCondition();
+            //foreach (SqlCar car in carList) {
+            //    textBoxTest.AppendText(car.registration + " " + car.price + Environment.NewLine);
+            //}    
+            textBoxTest.AppendText(Decimal.ToInt32(numericUpDownMOT.Value).ToString());
+
         }
 
         private void buttonDisplayAll_Click(object sender, EventArgs e) {
@@ -65,18 +74,18 @@ namespace CarCompareDesktop {
 
         public async void CreateNewCar() {
             SqlCar newCar = new SqlCar();
-            newCar.registration = textBoxNewReg.Text;
+            newCar.registration = textBoxNewReg.Text.ToUpper().Replace(" ","");
             newCar.make = textBoxNewMake.Text;
             newCar.model = textBoxNewModel.Text;
             newCar.trim = textBoxNewTrim.Text;
             newCar.mileage = int.Parse(textBoxNewMileage.Text);
             newCar.colour = textBoxNewColour.Text;
-            newCar.year = int.Parse(textBoxNewYear.Text);
+            newCar.year = Decimal.ToInt32(numericUpDownYear.Value);                
             newCar.price = decimal.Parse(textBoxNewPrice.Text);
             newCar.url = textBoxNewURL.Text;
             newCar.location = textBoxNewLocation.Text;
             newCar.dateAdded = DateTime.Today;
-            newCar.mot = int.Parse(textBoxNewMOT.Text);
+            newCar.mot = Decimal.ToInt32(numericUpDownMOT.Value);
 
                 // TODO - Insert here: a check for duplicate cars via registration number before calling the DB
 
@@ -160,6 +169,15 @@ namespace CarCompareDesktop {
                     break;
 
             }
+        }
+
+        // Mileage box limited to digits, Location box limited to letters
+        private void textBoxNewMileage_KeyPress(object sender, KeyPressEventArgs e) {
+            e.Handled = !(char.IsDigit(e.KeyChar)) && !(char.IsControl(e.KeyChar)); // why is it "&&", why is it "!", it seems opposite
+        }
+
+        private void textBoxNewLocation_KeyPress(object sender, KeyPressEventArgs e) {
+            e.Handled = !(char.IsLetter(e.KeyChar)) && !(char.IsControl(e.KeyChar));
         }
     }
 }
