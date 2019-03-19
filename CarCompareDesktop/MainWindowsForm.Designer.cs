@@ -83,6 +83,7 @@
             this.textBoxTest = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.numericUpDownYear = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownMOT = new System.Windows.Forms.NumericUpDown();
             this.buttonCreateCar = new System.Windows.Forms.Button();
             this.dateTimePickerNewDate = new System.Windows.Forms.DateTimePicker();
@@ -109,15 +110,16 @@
             this.label24 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.numericUpDownYear = new System.Windows.Forms.NumericUpDown();
+            this.buttonDeleteByCriteria = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMOT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMOT)).BeginInit();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -636,6 +638,28 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Add";
             // 
+            // numericUpDownYear
+            // 
+            this.numericUpDownYear.Location = new System.Drawing.Point(596, 187);
+            this.numericUpDownYear.Maximum = new decimal(new int[] {
+            2020,
+            0,
+            0,
+            0});
+            this.numericUpDownYear.Minimum = new decimal(new int[] {
+            1990,
+            0,
+            0,
+            0});
+            this.numericUpDownYear.Name = "numericUpDownYear";
+            this.numericUpDownYear.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownYear.TabIndex = 79;
+            this.numericUpDownYear.Value = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            // 
             // numericUpDownMOT
             // 
             this.numericUpDownMOT.Location = new System.Drawing.Point(596, 320);
@@ -862,6 +886,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.Gray;
+            this.tabPage4.Controls.Add(this.buttonDeleteByCriteria);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -869,27 +894,15 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Delete (advanced)";
             // 
-            // numericUpDownYear
+            // buttonDeleteByCriteria
             // 
-            this.numericUpDownYear.Location = new System.Drawing.Point(596, 187);
-            this.numericUpDownYear.Maximum = new decimal(new int[] {
-            2020,
-            0,
-            0,
-            0});
-            this.numericUpDownYear.Minimum = new decimal(new int[] {
-            1990,
-            0,
-            0,
-            0});
-            this.numericUpDownYear.Name = "numericUpDownYear";
-            this.numericUpDownYear.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownYear.TabIndex = 79;
-            this.numericUpDownYear.Value = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
+            this.buttonDeleteByCriteria.Location = new System.Drawing.Point(495, 330);
+            this.buttonDeleteByCriteria.Name = "buttonDeleteByCriteria";
+            this.buttonDeleteByCriteria.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteByCriteria.TabIndex = 0;
+            this.buttonDeleteByCriteria.Text = "Delete by Criteria";
+            this.buttonDeleteByCriteria.UseVisualStyleBackColor = true;
+            this.buttonDeleteByCriteria.Click += new System.EventHandler(this.buttonDeleteByCriteria_Click);
             // 
             // MainWindowsForm
             // 
@@ -912,8 +925,9 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMOT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMOT)).EndInit();
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1007,6 +1021,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDownMOT;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.NumericUpDown numericUpDownYear;
+        private System.Windows.Forms.Button buttonDeleteByCriteria;
     }
 }
 

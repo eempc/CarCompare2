@@ -67,7 +67,6 @@ namespace CarCompareDesktop {
         }
 
         // CREATE
-
         private void buttonCreateCar_Click_1(object sender, EventArgs e) {
             CreateNewCar();
         }
@@ -136,10 +135,6 @@ namespace CarCompareDesktop {
             }
         }
 
-        public void DeleteByCriteria() {
-
-        }
-
         // Sorting by selecting an option in the combo box, sort by price (asc/desc)
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
             int index = comboBox1.SelectedIndex;
@@ -167,7 +162,6 @@ namespace CarCompareDesktop {
                     break;
                 default:
                     break;
-
             }
         }
 
@@ -178,6 +172,22 @@ namespace CarCompareDesktop {
 
         private void textBoxNewLocation_KeyPress(object sender, KeyPressEventArgs e) {
             e.Handled = !(char.IsLetter(e.KeyChar)) && !(char.IsControl(e.KeyChar));
+        }
+
+        private void buttonDeleteByCriteria_Click(object sender, EventArgs e) {
+            DeleteByCriteria();
+        }
+
+        public void DeleteByCriteria() {
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to delete all cars from the database according to the criteria?", 
+                "Important Question",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Exclamation);
+
+            if (result == DialogResult.Yes) {
+
+            }
         }
     }
 }
