@@ -588,10 +588,10 @@
             // 
             // textBoxTest
             // 
-            this.textBoxTest.Location = new System.Drawing.Point(8, 441);
+            this.textBoxTest.Location = new System.Drawing.Point(8, 318);
             this.textBoxTest.Multiline = true;
             this.textBoxTest.Name = "textBoxTest";
-            this.textBoxTest.Size = new System.Drawing.Size(148, 43);
+            this.textBoxTest.Size = new System.Drawing.Size(430, 166);
             this.textBoxTest.TabIndex = 1;
             // 
             // toolStrip1

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarCompareDesktop {
-    class Validations {
+namespace CarCompareDesktop
+{
+    class Validations
+    {
         public static string[] carManufacturers = {
             "Abarth", "Alfa Romeo", "Aston Martin", "Audi",
             "Bentley", "BMW", "Bugatti", "Cadillac", "Chevrolet",
@@ -64,7 +66,7 @@ namespace CarCompareDesktop {
             "Volkswagen",
             "Volvo"
         };
-          
-        
+
+
     }
 }

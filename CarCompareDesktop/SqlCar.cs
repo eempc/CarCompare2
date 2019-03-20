@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace CarCompareDesktop {
     public class SqlCar {        
