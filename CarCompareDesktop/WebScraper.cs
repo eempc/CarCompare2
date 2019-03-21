@@ -11,18 +11,23 @@ using Newtonsoft.Json;
 // Retrieve web page then extract the JSON then deserialize the JSON
 // Do I need the Chrome Driver?
 
-namespace CarCompareDesktop {
-    class WebScraper {
+namespace CarCompareDesktop
+{
+    class WebScraper
+    {
 
         // Simple web client call (can include local files)
-        public static string GetHtmlViaWebClient(string url) {
+        public static string GetHtmlViaWebClient(string url)
+        {
             WebClient client = new WebClient();
             return client.DownloadString(url);
         }
 
         // URL must be HTTP
-        public static async Task<string> GetHtmlViaHttpClientAsync(string url) {
-            using (HttpClient client = new HttpClient()) {
+        public static async Task<string> GetHtmlViaHttpClientAsync(string url)
+        {
+            using (HttpClient client = new HttpClient())
+            {
                 Task<string> getHtmlTask = client.GetStringAsync(url);
                 // Independent work can go in here
                 string html = await getHtmlTask;
@@ -42,7 +47,7 @@ namespace CarCompareDesktop {
 
         public static string ExtractGumtreeJSON(string html)
         {
-            return ExtractViaRegex(html, "var dataLayer = ", "];");            
+            return ExtractViaRegex(html, "var dataLayer = ", "];");
         }
 
 
