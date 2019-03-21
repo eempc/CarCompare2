@@ -111,6 +111,23 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.buttonDeleteByCriteria = new System.Windows.Forms.Button();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.buttonSelectFolder = new System.Windows.Forms.Button();
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonAddMultipleCars = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -120,6 +137,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMOT)).BeginInit();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -185,6 +203,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
@@ -904,6 +923,114 @@
             this.buttonDeleteByCriteria.UseVisualStyleBackColor = true;
             this.buttonDeleteByCriteria.Click += new System.EventHandler(this.buttonDeleteByCriteria_Click);
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.buttonAddMultipleCars);
+            this.tabPage5.Controls.Add(this.buttonSelectFolder);
+            this.tabPage5.Controls.Add(this.listView2);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(1059, 524);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Add en masse";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // buttonSelectFolder
+            // 
+            this.buttonSelectFolder.Location = new System.Drawing.Point(436, 299);
+            this.buttonSelectFolder.Name = "buttonSelectFolder";
+            this.buttonSelectFolder.Size = new System.Drawing.Size(136, 23);
+            this.buttonSelectFolder.TabIndex = 4;
+            this.buttonSelectFolder.Text = "Select Folder";
+            this.buttonSelectFolder.UseVisualStyleBackColor = true;
+            this.buttonSelectFolder.Click += new System.EventHandler(this.buttonSelectFolder_Click);
+            // 
+            // listView2
+            // 
+            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader14,
+            this.columnHeader15,
+            this.columnHeader16,
+            this.columnHeader17,
+            this.columnHeader18,
+            this.columnHeader19,
+            this.columnHeader20,
+            this.columnHeader21,
+            this.columnHeader22,
+            this.columnHeader23,
+            this.columnHeader24,
+            this.columnHeader25,
+            this.columnHeader26});
+            this.listView2.ContextMenuStrip = this.contextMenuStrip1;
+            this.listView2.Location = new System.Drawing.Point(8, 12);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(1043, 211);
+            this.listView2.TabIndex = 3;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "ID";
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Reg";
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "Make";
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "Model";
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "Trim";
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "Mileage";
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "Colour";
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "Year";
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "Price";
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "URL";
+            // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "Location";
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "Date Added";
+            // 
+            // columnHeader26
+            // 
+            this.columnHeader26.Text = "MOT";
+            // 
+            // buttonAddMultipleCars
+            // 
+            this.buttonAddMultipleCars.Location = new System.Drawing.Point(454, 361);
+            this.buttonAddMultipleCars.Name = "buttonAddMultipleCars";
+            this.buttonAddMultipleCars.Size = new System.Drawing.Size(149, 23);
+            this.buttonAddMultipleCars.TabIndex = 5;
+            this.buttonAddMultipleCars.Text = "Add Multiple Cars";
+            this.buttonAddMultipleCars.UseVisualStyleBackColor = true;
+            this.buttonAddMultipleCars.Click += new System.EventHandler(this.buttonAddMultipleCars_Click);
+            // 
             // MainWindowsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -928,6 +1055,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMOT)).EndInit();
             this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1022,6 +1150,23 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.NumericUpDown numericUpDownYear;
         private System.Windows.Forms.Button buttonDeleteByCriteria;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button buttonSelectFolder;
+        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.ColumnHeader columnHeader17;
+        private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
+        private System.Windows.Forms.ColumnHeader columnHeader20;
+        private System.Windows.Forms.ColumnHeader columnHeader21;
+        private System.Windows.Forms.ColumnHeader columnHeader22;
+        private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.ColumnHeader columnHeader24;
+        private System.Windows.Forms.ColumnHeader columnHeader25;
+        private System.Windows.Forms.ColumnHeader columnHeader26;
+        private System.Windows.Forms.Button buttonAddMultipleCars;
     }
 }
 

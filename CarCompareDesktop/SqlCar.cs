@@ -120,6 +120,7 @@ namespace CarCompareDesktop {
             connect.Close();
         }
 
+        // Add one car via manual method (but I am still going to add cars en masse with this method because I want to wrap this project up)
         public static async Task CreateDatabaseEntryAsync(SqlCar newCar) {
             List<string> columns = GetColumnNames();
             columns.RemoveAt(0); // Remove id column as it is assigned automatically as opposed to if (str != "Id")

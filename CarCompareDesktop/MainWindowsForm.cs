@@ -48,11 +48,11 @@ namespace CarCompareDesktop
             //    textBoxTest.AppendText(car.registration + " " + car.price + Environment.NewLine);
             //}    
             //textBoxTest.AppendText(Decimal.ToInt32(numericUpDownMOT.Value).ToString());
-            //string fileText = WebScraper.GetHtmlViaWebClient(@"D:\Projects\CarCompareDesktop\CarCompareDesktop\Resources\TestCar2019-03-20.html");
-            //string json = WebScraper.ExtractGumtreeJSON(fileText);
-            string file = File.ReadAllText(@"D:\Projects\CarCompareDesktop\CarCompareDesktop\Resources\TestCar.html");
-            SqlCar newCar = WebScraper.NewGumtreeCar(file);
-            textBoxTest.AppendText(newCar.url);
+            string fileText = WebScraper.GetHtmlViaWebClient(@"D:\Temp\TestCar2019-03-20.html");
+            string json = WebScraper.ExtractGumtreeJSON(fileText);
+            //string file = File.ReadAllText(@"D:\Projects\CarCompareDesktop\CarCompareDesktop\Resources\TestCar.html");
+            //SqlCar newCar = WebScraper.NewGumtreeCar(file);
+            textBoxTest.AppendText(json);
         }
 
         private void buttonDisplayAll_Click(object sender, EventArgs e)
@@ -64,10 +64,10 @@ namespace CarCompareDesktop
         public async void DisplayAll()
         {
             myCars = await SqlCar.ReadDatabaseAsync("SELECT * FROM Car");
-            PopulateListView(myCars);
+            PopulateListView1(myCars);
         }
 
-        public void PopulateListView(List<SqlCar> carList)
+        public void PopulateListView1(List<SqlCar> carList)
         {
             listView1.Items.Clear();
             foreach (var car in carList)
@@ -171,22 +171,22 @@ namespace CarCompareDesktop
                 case 0:
                     // Try comparison delegate even though it looks weird
                     myCars.Sort((x, y) => x.price.CompareTo(y.price));
-                    PopulateListView(myCars);
+                    PopulateListView1(myCars);
                     toolStripStatusLabel1.Text = "Sorted by price (ascending)";
                     break;
                 case 1:
                     myCars.Sort((y, x) => x.price.CompareTo(y.price));
-                    PopulateListView(myCars);
+                    PopulateListView1(myCars);
                     toolStripStatusLabel1.Text = "Sorted by price (descending)";
                     break;
                 case 2:
                     myCars.Sort((x, y) => x.year.CompareTo(y.year));
-                    PopulateListView(myCars);
+                    PopulateListView1(myCars);
                     toolStripStatusLabel1.Text = "Sorted by year (asc)";
                     break;
                 case 3:
                     myCars.Sort((y, x) => x.year.CompareTo(y.year));
-                    PopulateListView(myCars);
+                    PopulateListView1(myCars);
                     toolStripStatusLabel1.Text = "Sorted by year (desc)";
                     break;
                 default:
@@ -222,6 +222,51 @@ namespace CarCompareDesktop
             if (result == DialogResult.Yes)
             {
 
+            }
+        }
+
+
+        List<SqlCar> pendingAddCars = new List<SqlCar>();
+        public void AddGumtreeFiles()
+        {
+            listView2.Clear();
+           
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "HTML (*.html)|*.html|" + "All files (*.*)|*.*";
+            ofd.Multiselect = true;
+            ofd.Title = "HTML file browser";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                foreach (string file in ofd.FileNames)
+                {
+                    string fullHtml = File.ReadAllText(file);
+                    SqlCar newCar = WebScraper.NewGumtreeCar(fullHtml);
+                    pendingAddCars.Add(newCar);
+
+                    ListViewItem newItem = new ListViewItem(newCar.id.ToString());
+                    foreach (PropertyInfo prop in newCar.GetType().GetProperties())
+                    {
+                        if (prop.Name != "id")
+                        {
+                            newItem.SubItems.Add(prop.GetValue(newCar, null).ToString());
+                        }
+                    }
+                    listView2.Items.Add(newItem);
+                }
+            }
+        }
+
+        private void buttonSelectFolder_Click(object sender, EventArgs e)
+        {
+            AddGumtreeFiles();
+        }
+
+        private async void buttonAddMultipleCars_Click(object sender, EventArgs e)
+        {
+            foreach (SqlCar car in pendingAddCars)
+            {
+                await SqlCar.CreateDatabaseEntryAsync(car);
             }
         }
     }
